@@ -41,9 +41,10 @@ nav a.active{color:var(--amber);background:rgba(245,158,11,0.15)}
 
 /* PROGRESS */
 .progress-bar{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:40px}
-.step-dot{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;flex:1;max-width:120px}
-.step-dot::after{content:'';position:absolute;top:16px;left:60%;width:80%;height:2px;background:var(--border);z-index:0}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;flex:1;max-width:100px;overflow:visible;pointer-events:none}
+.step-dot::after{content:'';position:absolute;top:16px;left:60%;width:80%;height:2px;background:var(--border);z-index:0;pointer-events:none}
 .step-dot:last-child::after{display:none}
+.dot{pointer-events:none}
 .dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);z-index:1;transition:.3s}
 .step-dot.active .dot{border-color:var(--amber);background:rgba(245,158,11,0.15);color:var(--amber)}
 .step-dot.done .dot{border-color:var(--green);background:rgba(16,185,129,0.15);color:var(--green)}
@@ -1024,8 +1025,10 @@ select option{background:var(--bg2);color:var(--text)}
 
 <script>
 // ─── PAYMENT CONFIG ──────────────────────────────────────
-// TODO: Replace with your real Stripe payment link from stripe.com/payment-links
-const STRIPE_PAYMENT_LINK = 'https://stripe.com'; // PLACEHOLDER — configure on Stripe dashboard
+// Stripe live publishable key (admin@holyrentals.com)
+const STRIPE_PK = 'pk_live_JbJRtjb23Aujij7TTHOft6jR008MOj8TLY';
+// TODO: Replace with a real Payment Link from dashboard.stripe.com/payment-links
+const STRIPE_PAYMENT_LINK = 'https://stripe.com'; // PLACEHOLDER — create Payment Link on Stripe dashboard
 
 // ─── STATE ───────────────────────────────────────────────
 const state = {
@@ -1203,6 +1206,31 @@ function generateQuote() {
   });
   window.scrollTo({top:200,behavior:'smooth'});
 }
+
+// ─── ROBUST CLICK BINDING (DOMContentLoaded backup) ──────
+document.addEventListener('DOMContentLoaded', () => {
+  // Rebind all option-card clicks via addEventListener (more reliable on mobile/touch)
+  document.querySelectorAll('.option-card[data-type]').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      e.stopPropagation();
+      selectType(this);
+    });
+  });
+  document.querySelectorAll('[data-urgency]').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      e.stopPropagation();
+      selectUrgency(this);
+    });
+  });
+  document.querySelectorAll('.feature-toggle').forEach(card => {
+    card.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleFeature(this);
+    });
+  });
+});
 
 function restart() {
   // Reset state

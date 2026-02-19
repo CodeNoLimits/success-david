@@ -1348,7 +1348,7 @@ function proceedToPayment() {
   document.getElementById('cf-devis-ref').value = ref;
   document.getElementById('cf-amount').value = fmtPrice(r.price);
   document.getElementById('cf-subject').value = '[DEVIS ' + ref + '] ' + name + ' — ' + fmtPrice(r.price);
-  document.getElementById('cf-message').value = 'Bonjour,\n\nJe souhaite procéder au paiement du devis ' + ref + ' d'un montant de ' + fmtPrice(r.price) + '.\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nMerci de confirmer les modalités de paiement.';
+  document.getElementById('cf-message').value = 'Bonjour,\n\nJe souhaite procéder au paiement du devis ' + ref + ' d\'un montant de ' + fmtPrice(r.price) + '.\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nMerci de confirmer les modalités de paiement.';
 
   // Virement mailto link
   const subject = encodeURIComponent('[PAIEMENT] Devis ' + ref + ' — ' + fmtPrice(r.price));

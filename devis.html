@@ -1358,37 +1358,28 @@ function proceedToPayment() {
 
 function openStripe() {
   if (STRIPE_PAYMENT_LINK === 'https://stripe.com' || STRIPE_PAYMENT_LINK.includes('placeholder')) {
-    alert('Paiement par carte : lien Stripe non encore configuré.\nContactez-nous directement à dreamnovaultimate@gmail.com pour procéder au paiement.');
+    const ref = document.getElementById('q-ref').textContent;
+    const name = (document.getElementById('fname').value + ' ' + document.getElementById('lname').value).trim();
+    const email = document.getElementById('email').value;
+    const subj = encodeURIComponent('[PAIEMENT CB] Devis ' + ref + ' — ' + name);
+    const body = encodeURIComponent('Bonjour,\n\nJe souhaite payer par carte le devis ' + ref + '.\nMerci de m\'envoyer un lien de paiement Stripe.\n\n' + name + '\n' + email);
+    window.open('mailto:dreamnovaultimate@gmail.com?subject=' + subj + '&body=' + body, '_blank');
     return;
   }
   window.open(STRIPE_PAYMENT_LINK, '_blank');
 }
 
 function handleFormSubmit(e) {
-  // Check if Formspree ID is configured
-  const form = document.getElementById('contact-form');
-  if (form.action.includes('FORMSPREE_ID')) {
-    e.preventDefault();
-    alert('Formulaire non configuré.\nEnvoyez votre message directement à : dreamnovaultimate@gmail.com');
-    return;
-  }
-  // Let Formspree handle it via fetch for better UX
   e.preventDefault();
-  const data = new FormData(form);
-  fetch(form.action, {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).then(r => {
-    if (r.ok) {
-      document.getElementById('cf-success').style.display = 'block';
-      form.reset();
-    } else {
-      alert('Erreur envoi. Contactez directement : dreamnovaultimate@gmail.com');
-    }
-  }).catch(() => {
-    alert('Erreur réseau. Contactez directement : dreamnovaultimate@gmail.com');
-  });
+  const name = document.getElementById('cf-name').value;
+  const email = document.getElementById('cf-email').value;
+  const ref = document.getElementById('cf-devis-ref').value;
+  const msg = document.getElementById('cf-message').value;
+  const subject = document.getElementById('cf-subject').value || ('[DEVIS] ' + ref);
+  const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+  const subj = encodeURIComponent(subject);
+  window.open('mailto:dreamnovaultimate@gmail.com?subject=' + subj + '&body=' + body, '_blank');
+  document.getElementById('cf-success').style.display = 'block';
 }
 
 </script>

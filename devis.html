@@ -981,12 +981,12 @@ select option{background:var(--bg2);color:var(--text)}
         <div id="iban-copied" style="display:none;color:var(--amber);font-size:0.8rem;text-align:center;margin-top:6px;font-weight:600">IBAN copié dans le presse-papiers !</div>
       </div>
 
-      <!-- Carte bancaire via PayPal -->
+      <!-- Stripe Card Payment -->
       <div class="payment-card payment-card-featured">
         <div class="pay-badge">Recommandé</div>
         <div class="pay-icon">💳</div>
         <div class="pay-name">Paiement par carte</div>
-        <div class="pay-desc">CB, Visa, Mastercard — paiement sécurisé via PayPal (pas de compte requis).</div>
+        <div class="pay-desc">CB, Visa, Mastercard, Apple Pay — paiement sécurisé Stripe.</div>
         <a id="pay-card-link" href="#" target="_blank" class="pay-btn pay-btn-stripe">
           Payer par carte →
         </a>
@@ -1050,7 +1050,7 @@ select option{background:var(--bg2);color:var(--text)}
 // Stripe live publishable key (admin@holyrentals.com)
 const STRIPE_PK = 'pk_live_JbJRtjb23Aujij7TTHOft6jR008MOj8TLY';
 // TODO: Replace with a real Payment Link from dashboard.stripe.com/payment-links
-// Card payments handled via PayPal (accepts Visa/MC without account)
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/14A9AT68w6vobP4bEv2Ry07';
 
 // ─── STATE ───────────────────────────────────────────────
 const state = {
@@ -1372,13 +1372,8 @@ function proceedToPayment() {
     + '&amount=' + acompte;
   document.getElementById('pay-paypal-link').href = paypalURL;
 
-  // Card payment also via PayPal (accepts Visa/MC without PayPal account)
-  var cardURL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_xclick'
-    + '&business=amoredavid46%40gmail.com'
-    + '&currency_code=EUR'
-    + '&item_name=' + encodeURIComponent('Devis ' + ref + ' — Paiement CB')
-    + '&amount=' + acompte;
-  document.getElementById('pay-card-link').href = cardURL;
+  // Stripe card payment (custom amount — client enters acompte)
+  document.getElementById('pay-card-link').href = STRIPE_PAYMENT_LINK;
 }
 
 function copyIBAN() {

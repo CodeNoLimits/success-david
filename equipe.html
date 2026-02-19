@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="fr"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Équipe — DreamNova</title>
+    <meta name="description" content="Découvrez l'équipe DreamNova. Une alliance entre l'expertise humaine de pointe et l'intelligence artificielle autonome.">
+    <link rel="canonical" href="https://dreamnova-bible-site.vercel.app/equipe.html">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg-primary: #0c0a09; --bg-secondary: #1c1917; --bg-card: rgba(28, 25, 23, 0.85);
+        --gold: #d4af37; --gold-bright: #f59e0b; --amber: #f59e0b;
+        --text-primary: #f5f5f4; --text-secondary: #a8a29e; --text-muted: #78716c;
+        --border: rgba(245, 158, 11, 0.18); --border-hover: rgba(212, 175, 55, 0.5);
+        --radius: 12px; --radius-lg: 20px;
+        --font-display: "Space Grotesk", sans-serif; --font-body: "Inter", sans-serif;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--bg-primary); color: var(--text-primary);
+        font-family: var(--font-body); font-size: 16px; line-height: 1.7;
+        min-height: 100vh; overflow-x: hidden;
+      }
+      body::before {
+        content: ""; position: fixed; inset: 0;
+        background: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
+                    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(245, 158, 11, 0.04) 0%, transparent 60%);
+        pointer-events: none; z-index: 0;
+      }
+      .site-header {
+        position: sticky; top: 0; z-index: 100; background: rgba(12, 10, 9, 0.92);
+        border-bottom: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 0 2rem;
+      }
+      .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 1rem; }
+      .logo-wrap { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; flex-shrink: 0; }
+      .logo-mark { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; color: #0c0a09; font-family: var(--font-display); flex-shrink: 0; }
+      .logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.05em; }
+      .logo-text span { color: var(--gold); }
+      .site-nav { display: flex; gap: 0.25rem; flex-wrap: wrap; align-items: center; }
+      .site-nav a { text-decoration: none; color: var(--text-secondary); font-size: 0.8rem; font-weight: 500; padding: 0.35rem 0.7rem; border-radius: 6px; border: 1px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: var(--font-display); letter-spacing: 0.02em; }
+      .site-nav a:hover, .site-nav a.active { color: var(--gold); background: rgba(212, 175, 55, 0.08); border-color: var(--border); }
+      .btn-nav-cta { background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%) !important; color: #0c0a09 !important; border-color: transparent !important; font-weight: 700 !important; }
+      
+      .site-main { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; position: relative; z-index: 1; }
+      .page-hero { text-align: center; margin-bottom: 4rem; }
+      .hero-eyebrow { display: inline-block; padding: 0.3rem 1rem; background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 20px; color: var(--gold); font-size: 0.75rem; font-weight: 600; font-family: var(--font-display); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; }
+      .page-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; background: linear-gradient(135deg, #f5f5f4 30%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .page-sub { color: var(--text-secondary); font-size: 1.05rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+      
+      .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+      .team-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; backdrop-filter: blur(12px); transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; position: relative; overflow: hidden; }
+      .team-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--amber)); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+      .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(212, 175, 55, 0.15); border-color: var(--border-hover); }
+      .team-card:hover::after { transform: scaleX(1); }
+      
+      .photo-wrap { width: 120px; height: 120px; margin: 0 auto 1.5rem; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--gold), var(--border)); position: relative; }
+      .photo-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--bg-secondary); overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 2.5rem; color: var(--gold); font-weight: 800; }
+      .photo-inner img { width: 100%; height: 100%; object-fit: cover; }
+      
+      .member-role { color: var(--gold); font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+      .member-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1rem; }
+      .member-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+      
+      .member-links { display: flex; justify-content: center; gap: 1rem; }
+      .member-links a { color: var(--text-muted); transition: color 0.2s; text-decoration: none; }
+      .member-links a:hover { color: var(--gold); }
+      .member-links svg { width: 20px; height: 20px; }
+
+      .agents-section { background: rgba(212, 175, 55, 0.03); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: var(--radius-lg); padding: 3rem; text-align: center; margin-bottom: 4rem; }
+      .agents-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1rem; }
+      .agents-desc { color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; }
+      .agents-labels { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+      .agent-label { background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--gold); padding: 0.4rem 1rem; border-radius: 20px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; }
+
+      .site-footer { text-align: center; padding: 2.5rem 2rem; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem; font-family: var(--font-display); letter-spacing: 0.05em; }
+      .site-footer .nova-tam { color: var(--gold); font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 0.4rem; }
+    </style>
+  \n    <meta property="og:title" content="L'Équipe — DreamNova">\n    <meta property="og:description" content="Découvrez l'équipe DreamNova. Une alliance entre l'expertise humaine de pointe et l'intelligence artificielle autonome.">\n    <meta property="og:image" content="https://dreamnova-bible-site.vercel.app/img/screenshot.jpg">\n    <meta property="og:url" content="https://dreamnova-bible-site.vercel.app/equipe.html">\n    <meta name="twitter:card" content="summary_large_image"></head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="index.html" class="logo-wrap">
+          <div class="logo-mark">DN</div>
+          <span class="logo-text">DREAM<span>NOVA</span></span>
+        </a>
+        <nav class="site-nav">
+          <a href="index.html" data-i18n="nav.center">Hub</a>
+          <a href="portfolio.html" data-i18n="nav.portfolio">Portfolio</a>
+          <a href="tarifs.html" data-i18n="nav.tarifs">Tarifs</a>
+          <a href="equipe.html" class="active" data-i18n="nav.equipe">Equipe</a>
+          <a href="devis.html" class="btn-nav-cta" data-i18n="nav.devis">Devis gratuit</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="page-hero">
+        <div class="hero-eyebrow" data-i18n="team.hero_eyebrow">La Force Motrice</div>
+        <h1 class="page-title" data-i18n="team.hero_title">L'Équipe DreamNova</h1>
+        <p class="page-sub" data-i18n="team.hero_sub">Une alliance puissante entre la vision humaine à Jerusalem et l'exécution asynchrone d'une intelligence artificielle autonome mondiale.</p>
+      </section>
+
+      <div class="team-grid">
+        <!-- DAVID AMOR -->
+        <div class="team-card">
+          <div class="photo-wrap">
+            <div class="photo-inner">DA</div>
+          </div>
+          <div class="member-role" data-i18n="team.ceo_role">CEO &amp; Fondateur</div>
+          <h3 class="member-name">David Amor</h3>
+          <p class="member-desc" data-i18n="team.ceo_desc">Basé à Jérusalem, portant une vision de 63M$. David définit la direction stratégique, bâtit les écosystèmes et supervise le développement de solutions d'élite mondiales.</p>
+          <div class="member-links">
+            <a href="ceo-global.html" title="CEO Global">🔗</a>
+            <a href="ceo-pmg.html" title="CEO PMG">📄</a>
+          </div>
+        </div>
+
+        <!-- NOVA-TAM -->
+        <div class="team-card">
+          <div class="photo-wrap">
+            <div class="photo-inner">NT</div>
+          </div>
+          <div class="member-role" data-i18n="team.cto_role">CTO IA Autonome</div>
+          <h3 class="member-name">Nova-Tam</h3>
+          <p class="member-desc" data-i18n="team.cto_desc">Système asynchrone piloté par le modèle Claude d'Anthropic. Nova-Tam dirige l'architecture, écrit le code et exécute les opérations complexes sur l'ensemble de la flotte de projets.</p>
+          <div class="member-links">
+            <a href="cto-global.html" title="CTO Global">🔗</a>
+            <a href="cto-pmg.html" title="CTO PMG">📄</a>
+          </div>
+        </div>
+
+        <!-- OPENCLAW GATEWAY -->
+        <div class="team-card">
+          <div class="photo-wrap">
+            <div class="photo-inner">OC</div>
+          </div>
+          <div class="member-role" data-i18n="team.coo_role">COO Opérations</div>
+          <h3 class="member-name">OpenClaw Gateway</h3>
+          <p class="member-desc" data-i18n="team.coo_desc">Système de monitoring 24/7. Gère les opérations en temps réel, les communications WhatsApp/Telegram, et assure l'auto-guérison de tous les processus serveurs de DreamNova.</p>
+          <div class="member-links">
+            <a href="coo-global.html" title="COO Global">🔗</a>
+            <a href="coo-pmg.html" title="COO PMG">📄</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGENTS ECOSYSTEME -->
+      <section class="agents-section">
+        <h2 class="agents-title" data-i18n="team.agents_title">Micro-Agents Spécialisés</h2>
+        <p class="agents-desc" data-i18n="team.agents_desc">Notre écosystème est soutenu par une flotte d'agents spécialisés, chacun asynchrone et capable d'intervenir chirurgicalement sur des projets précis.</p>
+        <div class="agents-labels">
+          <span class="agent-label">AG_KEREN</span>
+          <span class="agent-label">AG_ESTHER</span>
+          <span class="agent-label">AG_BAROUKH</span>
+          <span class="agent-label">AG_MISSION</span>
+          <span class="agent-label">AG_DREAMOS</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span class="nova-tam" data-i18n="footer.nova_tam">NOVA-TAM — Système Autonome CEO/CTO/COO</span>
+      <span data-i18n="footer.bottom">Na Nach Nachma Nachman MeUman &nbsp;·&nbsp; DreamNova © 2026</span>
+    </footer>
+
+    <script src="/lang/i18n.js" defer=""></script>
+  
+
+</body></html>

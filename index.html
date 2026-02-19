@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DREAM NOVA — Centre de Commandement — DreamNova</title>
+    <meta name="description" content="DreamNova — Agence de développement web et IA 100% autonome. Sites, SaaS, applications livrés en 24-72h. 46 projets livrés, 11 clients actifs.">
+    <meta property="og:title" content="DreamNova — Agence IA Autonome 24/7">
+    <meta property="og:description" content="Développement web et IA ultra-rapide. Landing pages, SaaS, applications. Prix 2-5x inférieurs aux agences classiques.">
+    <meta property="og:image" content="https://dreamnova-bible-site.vercel.app/img/og-home.png">
+    <meta property="og:url" content="https://dreamnova-bible-site.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://dreamnova-bible-site.vercel.app/">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#D4AF37">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -1064,7 +1074,21 @@
           left: 1rem;
         }
       }
-    </style>
+    
+/* Newsletter CTA */
+.newsletter-section{background:linear-gradient(135deg,rgba(212,175,55,0.06),rgba(28,25,23,0.5));border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:3rem 2rem;text-align:center;margin:4rem 0}
+.newsletter-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;padding:0.25rem 0.9rem;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:20px;color:var(--gold);font-size:0.72rem;font-weight:600;font-family:var(--font-display);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem}
+.newsletter-title{font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;color:var(--text-primary);margin-bottom:0.75rem}
+.newsletter-sub{color:var(--text-secondary);max-width:480px;margin:0 auto 2rem;font-size:0.95rem}
+.newsletter-form{display:flex;gap:0.75rem;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.newsletter-input{flex:1;min-width:220px;padding:0.75rem 1.25rem;background:rgba(12,10,9,0.8);border:1px solid var(--border);border-radius:50px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none;transition:border-color 0.2s}
+.newsletter-input:focus{border-color:rgba(212,175,55,0.5)}
+.newsletter-input::placeholder{color:var(--text-muted)}
+.newsletter-btn{padding:0.75rem 1.75rem;background:linear-gradient(135deg,var(--gold),var(--amber));color:#0C0A09;font-weight:700;font-family:var(--font-display);font-size:0.9rem;border:none;border-radius:50px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.newsletter-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,175,55,0.35)}
+.newsletter-note{color:var(--text-muted);font-size:0.78rem;margin-top:1rem}
+
+</style>
   <script src="/lang/i18n.js" defer></script>
   </head>
   <body>
@@ -1091,6 +1115,8 @@
           <a href="cto-pmg.html" data-i18n="nav.cto_pmg">🔧 CTO PMG</a>
           <a href="coo-pmg.html" data-i18n="nav.coo_pmg">📋 COO PMG</a>
           <a href="devis.html" data-i18n="nav.devis">💰 Devis</a>
+  <a href="portfolio.html">🎯 Portfolio</a>
+  <a href="equipe.html">👥 Équipe</a>
           <div class="lang-selector">
             <button
               class="lang-btn active"
@@ -1528,7 +1554,20 @@
           </a>
         </div>
       </div>
-    </main>
+    
+      <!-- Newsletter CTA -->
+      <section class="newsletter-section">
+        <div class="newsletter-eyebrow">📧 Restez informé</div>
+        <h2 class="newsletter-title">Recevez nos offres & actualités</h2>
+        <p class="newsletter-sub">Nouvelles fonctionnalités, promotions exclusives et études de cas. Une newsletter par mois, zéro spam.</p>
+        <form class="newsletter-form" onsubmit="submitNewsletter(event)">
+          <input type="email" class="newsletter-input" placeholder="votre@email.com" required id="nlEmail">
+          <button type="submit" class="newsletter-btn">S'inscrire →</button>
+        </form>
+        <p class="newsletter-note">🔒 Données protégées · Désinscription en 1 clic · RGPD conforme</p>
+      </section>
+
+</main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <script>

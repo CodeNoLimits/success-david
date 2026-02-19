@@ -2,5 +2,9 @@
   "private": true,
   "dependencies": {
     "stripe": "^17.0.0"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0",
+    "puppeteer": "^24.37.5"
   }
 }

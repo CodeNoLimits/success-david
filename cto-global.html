@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<!DOCTYPE html><html lang="fr"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CTO Global — Bible DreamNova — DreamNova</title>
+    <meta name="description" content="Bible CTO DreamNova — Architecture technique, stack Next.js/Supabase/Vercel, CI/CD, sécurité, performance Lighthouse >90.">
+    <meta property="og:title" content="Bible CTO Global — DreamNova">
+    <meta property="og:url" content="https://dreamnova-bible-site.vercel.app/cto-global.html">
+    <link rel="canonical" href="https://dreamnova-bible-site.vercel.app/cto-global.html">
+    <link rel="manifest" href="/manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
 
   /* ===== RESET ===== */
@@ -457,7 +460,7 @@
   .doc-table tr:hover td { background: rgba(212,175,55,0.03); }
 
   </style>
-</head>
+\n    <meta property="og:description" content="Bible CTO DreamNova — Architecture technique, stack Next.js/Supabase/Vercel, CI/CD, sécurité, performance Lighthouse >90.">\n    <meta property="og:image" content="https://dreamnova-bible-site.vercel.app/img/screenshot.jpg">\n    <meta name="twitter:card" content="summary_large_image"></head>
 <body>
 <header class="site-header">
   <div class="header-inner">
@@ -474,6 +477,8 @@
     <a href="cto-pmg.html">🔧 CTO PMG</a>
     <a href="coo-pmg.html">📋 COO PMG</a>
       <a href="devis.html">💰 Devis</a>
+  <a href="portfolio.html">🎯 Portfolio</a>
+  <a href="equipe.html">👥 Équipe</a>
 </nav>
   </div>
 </header>
@@ -513,7 +518,7 @@
 <li><a href="#2-architecture-memoire-ram-vs-rom">Architecture Memoire RAM vs ROM</a></li>
 <li><a href="#3-arsenal-computer-use--4-agents">Arsenal Computer Use -- 4 Agents</a></li>
 <li><a href="#4-protocole-tahboulot">Protocole Tahboulot</a></li>
-<li><a href="#5-pipeline-whisper--nano-banana-pro">Pipeline Whisper -> Nano Banana Pro</a></li>
+<li><a href="#5-pipeline-whisper--nano-banana-pro">Pipeline Whisper -&gt; Nano Banana Pro</a></li>
 <li><a href="#6-stack-technique-complete">Stack Technique Complete</a></li>
 <li><a href="#7-infrastructure-autonome">Infrastructure Autonome</a></li>
 <li><a href="#8-mcp-protocol">MCP Protocol</a></li>
@@ -592,13 +597,13 @@
 
 <div class="table-wrap"><table class="doc-table"><tbody>
 <tr><th>Source</th><th>Destination</th><th>Transport</th><th>Latence cible</th></tr>
-<tr><td>WhatsApp client</td><td>OpenClaw -> Agent dedie</td><td>WSS local</td><td>< 2s</td></tr>
-<tr><td>Claude Code -> Vercel</td><td>GitHub Actions CI/CD</td><td>HTTPS</td><td>< 5 min</td></tr>
-<tr><td>Mac -> Dell</td><td>GitHub sync-queue</td><td>git pull 1min</td><td>< 2 min</td></tr>
-<tr><td>Audio client</td><td>Groq Whisper API</td><td>HTTPS</td><td>< 3s</td></tr>
-<tr><td>Audio local >60s</td><td>faster-whisper CUDA Dell</td><td>Tailscale</td><td>< 10s</td></tr>
-<tr><td>Nouvelle session Claude</td><td>MEMORY.md + NUCLEUS.md</td><td>disque local</td><td>< 5s</td></tr>
-<tr><td>Erreur prod</td><td>Sentry -> Cline -> PR</td><td>webhook</td><td>< 15 min</td></tr>
+<tr><td>WhatsApp client</td><td>OpenClaw -&gt; Agent dedie</td><td>WSS local</td><td>&lt; 2s</td></tr>
+<tr><td>Claude Code -&gt; Vercel</td><td>GitHub Actions CI/CD</td><td>HTTPS</td><td>&lt; 5 min</td></tr>
+<tr><td>Mac -&gt; Dell</td><td>GitHub sync-queue</td><td>git pull 1min</td><td>&lt; 2 min</td></tr>
+<tr><td>Audio client</td><td>Groq Whisper API</td><td>HTTPS</td><td>&lt; 3s</td></tr>
+<tr><td>Audio local &gt;60s</td><td>faster-whisper CUDA Dell</td><td>Tailscale</td><td>&lt; 10s</td></tr>
+<tr><td>Nouvelle session Claude</td><td>MEMORY.md + NUCLEUS.md</td><td>disque local</td><td>&lt; 5s</td></tr>
+<tr><td>Erreur prod</td><td>Sentry -&gt; Cline -&gt; PR</td><td>webhook</td><td>&lt; 15 min</td></tr>
 </tbody></table></div>
 
 
@@ -634,7 +639,7 @@ RAM LAYER (session active uniquement)
     Format: TODO: [tache] -&amp;gt; DONE: [tache] [YYYY-MM-DD HH:MM]
 </code></pre>
 
-<p class="doc-p"><strong>Regle RAM critique:</strong> Avant toute operation longue (>5 min), figer l'etat dans</p>
+<p class="doc-p"><strong>Regle RAM critique:</strong> Avant toute operation longue (&gt;5 min), figer l'etat dans</p>
 <p class="doc-p">SESSION_LIVE.md. Si crash ou coupure courant: ce fichier est le seul moyen de reprendre.</p>
 
 <h3 class="doc-h3">ROM -- Memoire Permanente Inter-Sessions</h3>
@@ -988,5 +993,5 @@ async def human_move_to(page, selector: str):
   <span class="nova-tam">NOVA-TAM — Système Autonome CEO/CTO/COO</span>
   Na Nach Nachma Nachman MeUman &nbsp;·&nbsp; Ein Ye'ush Ba'olam Klal &nbsp;·&nbsp; DreamNova © 2026
 </footer>
-</body>
-</html>
+
+</body></html>

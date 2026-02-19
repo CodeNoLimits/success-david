@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<!DOCTYPE html><html lang="fr"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DreamNova — Devis Instantané</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Devis gratuit DreamNova — Configurez votre projet en 6 étapes et recevez un prix exact en temps réel. Landing page, site, SaaS.">
+    <meta property="og:title" content="Devis Gratuit — DreamNova Agence IA">
+    <meta property="og:description" content="Calculateur de devis en temps réel. Landing page dès 400€, site dès 900€, SaaS dès 1500€.">
+    <meta property="og:url" content="https://dreamnova-bible-site.vercel.app/devis.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://dreamnova-bible-site.vercel.app/devis.html">
+    <link rel="manifest" href="/manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════
    DREAMNOVA DEVIS — PREMIUM LUXURY REDESIGN
@@ -1114,7 +1120,7 @@ select option{background:var(--bg2);color:var(--text)}
 }
 
 </style>
-</head>
+\n    <meta property="og:image" content="https://dreamnova-bible-site.vercel.app/img/screenshot.jpg"></head>
 <body>
 
 <nav>
@@ -1127,12 +1133,14 @@ select option{background:var(--bg2);color:var(--text)}
   <a href="cto-pmg.html">🔧 CTO PMG</a>
   <a href="coo-pmg.html">📋 COO PMG</a>
   <a href="devis.html" class="active">💰 Devis</a>
+  <a href="portfolio.html">🎯 Portfolio</a>
+  <a href="equipe.html">👥 Équipe</a>
 </nav>
 
 <div class="hero">
-  <div class="badge">Devis instantan&eacute; &mdash; 0 API &mdash; 100% autonome</div>
+  <div class="badge">Devis instantané — 0 API — 100% autonome</div>
   <h1>Votre Devis en<br>60 Secondes</h1>
-  <p>Calculateur intelligent bas&eacute; sur la m&eacute;thodologie DreamNova. Obtenez une estimation pr&eacute;cise de votre projet IA &amp; web sans attendre.</p>
+  <p>Calculateur intelligent basé sur la méthodologie DreamNova. Obtenez une estimation précise de votre projet IA &amp; web sans attendre.</p>
 </div>
 
 <div class="calc-wrap">
@@ -1205,7 +1213,7 @@ select option{background:var(--bg2);color:var(--text)}
         <label class="option-card" data-type="fix" data-base="150" data-days="0.5">
           <input type="radio" name="project-type" value="fix">
           <div class="option-icon">🔧</div>
-          <div class="option-title">Fix & Optimisation</div>
+          <div class="option-title">Fix &amp; Optimisation</div>
           <div class="option-desc">Correction bug, optimisation performance, audit Lighthouse</div>
           <div class="option-price">Dès 150€ · quelques heures</div>
         </label>
@@ -1261,7 +1269,7 @@ select option{background:var(--bg2);color:var(--text)}
   <!-- STEP 3 — Délai & budget -->
   <div id="step3" style="display:none">
     <div class="card">
-      <div class="card-title">Délai & contexte</div>
+      <div class="card-title">Délai &amp; contexte</div>
       <div class="card-sub">Ces informations affinent votre estimation finale</div>
 
       <div class="form-group">
@@ -1492,7 +1500,7 @@ select option{background:var(--bg2);color:var(--text)}
           <div class="cgv-sign-note">En entrant votre nom, vous apposez votre signature électronique valant accord contractuel.</div>
         </div>
 
-        <button class="btn-sign" id="btn-sign" disabled onclick="proceedToPayment()">
+        <button class="btn-sign" id="btn-sign" disabled="" onclick="proceedToPayment()">
           Signer et procéder au paiement →
         </button>
       </div>
@@ -1523,7 +1531,7 @@ select option{background:var(--bg2);color:var(--text)}
 
         <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0">
           <button class="region-btn region-active" onclick="showBank('eur')" id="btn-eur">Europe (EUR)</button>
-          <button class="region-btn" onclick="showBank('ils')" id="btn-ils">Isra&euml;l (ILS)</button>
+          <button class="region-btn" onclick="showBank('ils')" id="btn-ils">Israël (ILS)</button>
           <button class="region-btn" onclick="showBank('usd')" id="btn-usd">USA (USD)</button>
           <button class="region-btn" onclick="showBank('cad')" id="btn-cad">Canada (CAD)</button>
         </div>
@@ -1534,18 +1542,18 @@ select option{background:var(--bg2);color:var(--text)}
           <div><strong>IBAN :</strong> <span id="iban-display">DE12 2022 0800 0040 5812 62</span></div>
           <div><strong>BIC/SWIFT :</strong> SXPYDEHH</div>
           <div><strong>Banque :</strong> Banking Circle S.A. (Allemagne)</div>
-          <div><strong>B&eacute;n&eacute;ficiaire :</strong> David Amore</div>
+          <div><strong>Bénéficiaire :</strong> David Amore</div>
         </div>
 
         <!-- ILS -->
         <div id="bank-ils" class="bank-details" style="display:none;background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.15);border-radius:12px;padding:16px 18px;margin:12px 0;text-align:left;font-size:0.82rem;line-height:1.7;backdrop-filter:blur(8px)">
-          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Virement bancaire (Isra&euml;l) :</div>
+          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Virement bancaire (Israël) :</div>
           <div><strong>Compte :</strong> <span id="iban-display-ils">000502718</span></div>
           <div><strong>Code banque :</strong> 054</div>
           <div><strong>Code agence :</strong> 051</div>
           <div><strong>SWIFT :</strong> JERSILIT</div>
           <div><strong>Banque :</strong> Bank of Jerusalem</div>
-          <div><strong>B&eacute;n&eacute;ficiaire :</strong> David Amore</div>
+          <div><strong>Bénéficiaire :</strong> David Amore</div>
         </div>
 
         <!-- USD -->
@@ -1567,13 +1575,13 @@ select option{background:var(--bg2);color:var(--text)}
           <div><strong>Institution :</strong> 352</div>
           <div><strong>SWIFT :</strong> Digital Commerce Bank</div>
           <div><strong>Interac e-Transfer :</strong> codenolimits@gmail.com</div>
-          <div><strong>B&eacute;n&eacute;ficiaire :</strong> David Amore</div>
+          <div><strong>Bénéficiaire :</strong> David Amore</div>
         </div>
 
         <button class="pay-btn pay-btn-bank" onclick="copyIBAN()">
-          Copier le num&eacute;ro de compte →
+          Copier le numéro de compte →
         </button>
-        <div id="iban-copied" style="display:none;color:var(--amber);font-size:0.8rem;text-align:center;margin-top:6px;font-weight:600">Copi&eacute; dans le presse-papiers !</div>
+        <div id="iban-copied" style="display:none;color:var(--amber);font-size:0.8rem;text-align:center;margin-top:6px;font-weight:600">Copié dans le presse-papiers !</div>
       </div>
 
       <!-- Stripe Card Payment -->
@@ -1614,17 +1622,17 @@ select option{background:var(--bg2);color:var(--text)}
         <div class="cf-row">
           <div class="cf-group">
             <label>Votre nom</label>
-            <input type="text" name="name" id="cf-name" required placeholder="Prénom Nom">
+            <input type="text" name="name" id="cf-name" required="" placeholder="Prénom Nom">
           </div>
           <div class="cf-group">
             <label>Email</label>
-            <input type="email" name="email" id="cf-email" required placeholder="vous@exemple.com">
+            <input type="email" name="email" id="cf-email" required="" placeholder="vous@exemple.com">
           </div>
         </div>
 
         <div class="cf-group">
           <label>Référence devis</label>
-          <input type="text" name="ref" id="cf-ref-display" readonly style="opacity:0.6;cursor:not-allowed">
+          <input type="text" name="ref" id="cf-ref-display" readonly="" style="opacity:0.6;cursor:not-allowed">
         </div>
 
         <div class="cf-group">
@@ -2065,5 +2073,6 @@ function handleFormSubmit(e) {
 }
 
 </script>
-</body>
-</html>
+
+
+</body></html>

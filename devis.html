@@ -466,6 +466,14 @@ select option{background:var(--bg2);color:var(--text)}
 
 .pay-btn-bank:hover { border-color: var(--amber); color: var(--amber); }
 
+.region-btn {
+  padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border);
+  background: transparent; color: var(--muted); font-size: 0.78rem; cursor: pointer;
+  transition: .2s; font-weight: 500;
+}
+.region-btn:hover { border-color: var(--amber); color: var(--amber); }
+.region-active { background: rgba(212,175,55,0.15); border-color: var(--amber); color: var(--amber); font-weight: 600; }
+
 .pay-btn-stripe {
   background: linear-gradient(135deg, var(--gold), var(--amber));
   color: #0C0A09;
@@ -963,22 +971,65 @@ select option{background:var(--bg2);color:var(--text)}
     </div>
 
     <div class="payment-cards">
-      <!-- Virement bancaire -->
-      <div class="payment-card">
+      <!-- Virement bancaire — Multi-région -->
+      <div class="payment-card" style="grid-column:1/-1">
         <div class="pay-icon">🏦</div>
         <div class="pay-name">Virement bancaire</div>
-        <div class="pay-desc">Virement SEPA (EUR) — rapide et sans frais.</div>
-        <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:8px;padding:12px;margin:8px 0;text-align:left;font-size:0.82rem;line-height:1.6">
-          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Coordonnées bancaires :</div>
-          <div><strong>IBAN :</strong> DE12 2022 0800 0040 5812 62</div>
+        <div class="pay-desc">Choisissez votre région pour recevoir les coordonnées adaptées.</div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0">
+          <button class="region-btn region-active" onclick="showBank('eur')" id="btn-eur">Europe (EUR)</button>
+          <button class="region-btn" onclick="showBank('ils')" id="btn-ils">Isra&euml;l (ILS)</button>
+          <button class="region-btn" onclick="showBank('usd')" id="btn-usd">USA (USD)</button>
+          <button class="region-btn" onclick="showBank('cad')" id="btn-cad">Canada (CAD)</button>
+        </div>
+
+        <!-- EUR -->
+        <div id="bank-eur" class="bank-details" style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:8px;padding:12px;margin:8px 0;text-align:left;font-size:0.82rem;line-height:1.6">
+          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Virement SEPA (Europe) :</div>
+          <div><strong>IBAN :</strong> <span id="iban-display">DE12 2022 0800 0040 5812 62</span></div>
           <div><strong>BIC/SWIFT :</strong> SXPYDEHH</div>
           <div><strong>Banque :</strong> Banking Circle S.A. (Allemagne)</div>
-          <div><strong>Bénéficiaire :</strong> David Amore</div>
+          <div><strong>B&eacute;n&eacute;ficiaire :</strong> David Amore</div>
         </div>
+
+        <!-- ILS -->
+        <div id="bank-ils" class="bank-details" style="display:none;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:8px;padding:12px;margin:8px 0;text-align:left;font-size:0.82rem;line-height:1.6">
+          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Virement bancaire (Isra&euml;l) :</div>
+          <div><strong>Compte :</strong> <span id="iban-display-ils">000502718</span></div>
+          <div><strong>Code banque :</strong> 054</div>
+          <div><strong>Code agence :</strong> 051</div>
+          <div><strong>SWIFT :</strong> JERSILIT</div>
+          <div><strong>Banque :</strong> Bank of Jerusalem</div>
+          <div><strong>B&eacute;n&eacute;ficiaire :</strong> David Amore</div>
+        </div>
+
+        <!-- USD -->
+        <div id="bank-usd" class="bank-details" style="display:none;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:8px;padding:12px;margin:8px 0;text-align:left;font-size:0.82rem;line-height:1.6">
+          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Wire Transfer (USA) :</div>
+          <div><strong>Account :</strong> <span id="iban-display-usd">8487154836</span></div>
+          <div><strong>ACH Routing :</strong> 026073150</div>
+          <div><strong>Fedwire Routing :</strong> 026073008</div>
+          <div><strong>SWIFT :</strong> CMFGUS33</div>
+          <div><strong>Bank :</strong> Community Federal Savings Bank</div>
+          <div><strong>Beneficiary :</strong> David Amore</div>
+        </div>
+
+        <!-- CAD -->
+        <div id="bank-cad" class="bank-details" style="display:none;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:8px;padding:12px;margin:8px 0;text-align:left;font-size:0.82rem;line-height:1.6">
+          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Virement bancaire (Canada) :</div>
+          <div><strong>Compte :</strong> <span id="iban-display-cad">938276193</span></div>
+          <div><strong>Transit :</strong> 10009</div>
+          <div><strong>Institution :</strong> 352</div>
+          <div><strong>SWIFT :</strong> Digital Commerce Bank</div>
+          <div><strong>Interac e-Transfer :</strong> codenolimits@gmail.com</div>
+          <div><strong>B&eacute;n&eacute;ficiaire :</strong> David Amore</div>
+        </div>
+
         <button class="pay-btn pay-btn-bank" onclick="copyIBAN()">
-          Copier l'IBAN →
+          Copier le num&eacute;ro de compte →
         </button>
-        <div id="iban-copied" style="display:none;color:var(--amber);font-size:0.8rem;text-align:center;margin-top:6px;font-weight:600">IBAN copié dans le presse-papiers !</div>
+        <div id="iban-copied" style="display:none;color:var(--amber);font-size:0.8rem;text-align:center;margin-top:6px;font-weight:600">Copi&eacute; dans le presse-papiers !</div>
       </div>
 
       <!-- Stripe Card Payment -->
@@ -1376,12 +1427,32 @@ function proceedToPayment() {
   document.getElementById('pay-card-link').href = STRIPE_PAYMENT_LINK;
 }
 
+var currentRegion = 'eur';
+var bankAccounts = {
+  eur: { value: 'DE12202208000040581262', label: 'IBAN' },
+  ils: { value: '000502718', label: 'Compte' },
+  usd: { value: '8487154836', label: 'Account' },
+  cad: { value: '938276193', label: 'Compte' }
+};
+
+function showBank(region) {
+  currentRegion = region;
+  ['eur','ils','usd','cad'].forEach(function(r) {
+    var el = document.getElementById('bank-' + r);
+    var btn = document.getElementById('btn-' + r);
+    if (el) el.style.display = r === region ? 'block' : 'none';
+    if (btn) { btn.classList.toggle('region-active', r === region); }
+  });
+  document.getElementById('iban-copied').style.display = 'none';
+}
+
 function copyIBAN() {
-  navigator.clipboard.writeText('DE12202208000040581262').then(function() {
+  var acct = bankAccounts[currentRegion];
+  navigator.clipboard.writeText(acct.value).then(function() {
     document.getElementById('iban-copied').style.display = 'block';
     setTimeout(function() { document.getElementById('iban-copied').style.display = 'none'; }, 3000);
   }).catch(function() {
-    prompt('Copiez cet IBAN :', 'DE12202208000040581262');
+    prompt('Copiez ce ' + acct.label + ' :', acct.value);
   });
 }
 

@@ -1207,29 +1207,17 @@ function generateQuote() {
   window.scrollTo({top:200,behavior:'smooth'});
 }
 
-// ─── ROBUST CLICK BINDING (DOMContentLoaded backup) ──────
-document.addEventListener('DOMContentLoaded', () => {
-  // Rebind all option-card clicks via addEventListener (more reliable on mobile/touch)
-  document.querySelectorAll('.option-card[data-type]').forEach(card => {
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', function(e) {
-      e.stopPropagation();
-      selectType(this);
-    });
-  });
-  document.querySelectorAll('[data-urgency]').forEach(card => {
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', function(e) {
-      e.stopPropagation();
-      selectUrgency(this);
-    });
-  });
-  document.querySelectorAll('.feature-toggle').forEach(card => {
-    card.addEventListener('click', function(e) {
-      e.stopPropagation();
-      toggleFeature(this);
-    });
-  });
+// ─── CLICK BINDING (direct — DOM already parsed at this point) ──────
+// Script is at bottom of body: all elements exist, no DOMContentLoaded needed.
+// Using .onclick assignment guarantees single handler per element.
+document.querySelectorAll('.option-card[data-type]').forEach(function(card) {
+  card.onclick = function() { selectType(this); };
+});
+document.querySelectorAll('[data-urgency]').forEach(function(card) {
+  card.onclick = function() { selectUrgency(this); };
+});
+document.querySelectorAll('.feature-toggle').forEach(function(card) {
+  card.onclick = function() { toggleFeature(this); };
 });
 
 function restart() {

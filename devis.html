@@ -1100,10 +1100,10 @@ select option{background:var(--bg2);color:var(--text)}
 
 <script>
 // ─── PAYMENT CONFIG ──────────────────────────────────────
-// Stripe live publishable key (admin@holyrentals.com)
-const STRIPE_PK = 'pk_live_JbJRtjb23Aujij7TTHOft6jR008MOj8TLY';
-// TODO: Replace with a real Payment Link from dashboard.stripe.com/payment-links
-const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/cNi14meIcdNP3iNdd0ds400';
+// Stripe DREAM AI (dreamaicorporation@gmail.com / acct_1S5uilC73eFEBNIC)
+const STRIPE_PK = 'pk_live_51S5uilC73eFEBNIC5f1o4AhZabqgqBzA4IvuBTXyKcs03CUI7dTJukp5pVoldk6C75Xu5oaWDmiVz7wYmbylKq5j00zUc1KD8V';
+const STRIPE_CHECKOUT_API = '/api/checkout';
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/cNiaEW7fK5hjbPj5Kyds401';
 
 // ─── STATE ───────────────────────────────────────────────
 const state = {
@@ -1425,8 +1425,36 @@ function proceedToPayment() {
     + '&amount=' + acompte;
   document.getElementById('pay-paypal-link').href = paypalURL;
 
-  // Stripe card payment (custom amount — client enters acompte)
-  document.getElementById('pay-card-link').href = STRIPE_PAYMENT_LINK;
+  // Stripe card payment — dynamic checkout with exact amount
+  var cardLink = document.getElementById('pay-card-link');
+  cardLink.href = '#';
+  cardLink.onclick = function(e) {
+    e.preventDefault();
+    cardLink.textContent = 'Redirection Stripe...';
+    cardLink.style.opacity = '0.7';
+    fetch(STRIPE_CHECKOUT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: acompte,
+        description: 'Devis ' + ref + ' — Acompte 40%',
+        email: document.getElementById('step4-email') ? document.getElementById('step4-email').value : ''
+      })
+    }).then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          window.open(STRIPE_PAYMENT_LINK, '_blank');
+          cardLink.textContent = 'Payer par carte \u2192';
+          cardLink.style.opacity = '1';
+        }
+      }).catch(function() {
+        window.open(STRIPE_PAYMENT_LINK, '_blank');
+        cardLink.textContent = 'Payer par carte \u2192';
+        cardLink.style.opacity = '1';
+      });
+  };
 }
 
 var currentRegion = 'eur';

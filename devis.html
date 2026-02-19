@@ -63,20 +63,20 @@ nav a.active{color:var(--amber);background:rgba(245,158,11,0.15)}
 .option-card:hover{border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.05)}
 .option-card.selected{border-color:var(--amber);background:rgba(245,158,11,0.1)}
 .option-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;color:var(--amber);font-size:14px;font-weight:700}
-.option-icon{font-size:24px;margin-bottom:8px}
-.option-title{font-weight:600;font-size:14px;margin-bottom:4px}
-.option-desc{font-size:12px;color:var(--muted);line-height:1.4}
-.option-price{font-size:11px;color:var(--amber);margin-top:6px;font-weight:500}
+.option-icon{font-size:24px;margin-bottom:8px;pointer-events:none}
+.option-title{font-weight:600;font-size:14px;margin-bottom:4px;pointer-events:none}
+.option-desc{font-size:12px;color:var(--muted);line-height:1.4;pointer-events:none}
+.option-price{font-size:11px;color:var(--amber);margin-top:6px;font-weight:500;pointer-events:none}
 
 /* FEATURES MULTI-SELECT */
 .features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:24px}
 .feature-toggle{border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:10px;background:var(--glass)}
 .feature-toggle:hover{border-color:rgba(245,158,11,0.4)}
 .feature-toggle.selected{border-color:var(--amber);background:rgba(245,158,11,0.1)}
-.feature-toggle .icon{font-size:18px;width:24px;text-align:center}
-.feature-toggle .info{flex:1}
-.feature-toggle .fname{font-size:13px;font-weight:500}
-.feature-toggle .fadd{font-size:11px;color:var(--amber);margin-top:2px}
+.feature-toggle .icon{font-size:18px;width:24px;text-align:center;pointer-events:none}
+.feature-toggle .info{flex:1;pointer-events:none}
+.feature-toggle .fname{font-size:13px;font-weight:500;pointer-events:none}
+.feature-toggle .fadd{font-size:11px;color:var(--amber);margin-top:2px;pointer-events:none}
 
 /* FORM */
 .form-group{margin-bottom:20px}
@@ -1207,17 +1207,18 @@ function generateQuote() {
   window.scrollTo({top:200,behavior:'smooth'});
 }
 
-// ─── CLICK BINDING (direct — DOM already parsed at this point) ──────
-// Script is at bottom of body: all elements exist, no DOMContentLoaded needed.
-// Using .onclick assignment guarantees single handler per element.
-document.querySelectorAll('.option-card[data-type]').forEach(function(card) {
-  card.onclick = function() { selectType(this); };
-});
-document.querySelectorAll('[data-urgency]').forEach(function(card) {
-  card.onclick = function() { selectUrgency(this); };
-});
-document.querySelectorAll('.feature-toggle').forEach(function(card) {
-  card.onclick = function() { toggleFeature(this); };
+// ─── EVENT DELEGATION — écoute globale sur document ──────
+// closest() remonte le DOM depuis l'élément cliqué (même si c'est un enfant)
+// C'est la méthode la plus fiable, aucune dépendance DOM timing.
+document.addEventListener('click', function(e) {
+  var card = e.target.closest('.option-card[data-type]');
+  if (card) { selectType(card); return; }
+
+  var urgency = e.target.closest('[data-urgency]');
+  if (urgency) { selectUrgency(urgency); return; }
+
+  var feature = e.target.closest('.feature-toggle');
+  if (feature) { toggleFeature(feature); return; }
 });
 
 function restart() {

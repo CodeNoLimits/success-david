@@ -975,20 +975,21 @@ select option{background:var(--bg2);color:var(--text)}
           <div><strong>Banque :</strong> Banking Circle S.A. (Allemagne)</div>
           <div><strong>Bénéficiaire :</strong> David Amore</div>
         </div>
-        <a id="pay-virement-link" class="pay-btn pay-btn-bank" href="#">
-          Confirmer mon virement →
-        </a>
+        <button class="pay-btn pay-btn-bank" onclick="copyIBAN()">
+          Copier l'IBAN →
+        </button>
+        <div id="iban-copied" style="display:none;color:var(--amber);font-size:0.8rem;text-align:center;margin-top:6px;font-weight:600">IBAN copié dans le presse-papiers !</div>
       </div>
 
-      <!-- Stripe -->
+      <!-- Carte bancaire via PayPal -->
       <div class="payment-card payment-card-featured">
         <div class="pay-badge">Recommandé</div>
         <div class="pay-icon">💳</div>
         <div class="pay-name">Paiement par carte</div>
-        <div class="pay-desc">Paiement sécurisé Stripe — CB, Visa, Mastercard, American Express.</div>
-        <button class="pay-btn pay-btn-stripe" onclick="openStripe()">
+        <div class="pay-desc">CB, Visa, Mastercard — paiement sécurisé via PayPal (pas de compte requis).</div>
+        <a id="pay-card-link" href="#" target="_blank" class="pay-btn pay-btn-stripe">
           Payer par carte →
-        </button>
+        </a>
       </div>
 
       <!-- PayPal -->
@@ -996,7 +997,7 @@ select option{background:var(--bg2);color:var(--text)}
         <div class="pay-icon" style="font-size:2rem">🅿</div>
         <div class="pay-name">PayPal</div>
         <div class="pay-desc">Paiement via PayPal — compte ou carte bancaire acceptés.</div>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=amoredavid46%40gmail.com&currency_code=EUR&item_name=Devis%20DreamNova" target="_blank" class="pay-btn pay-btn-paypal">
+        <a id="pay-paypal-link" href="#" target="_blank" class="pay-btn pay-btn-paypal">
           Payer via PayPal →
         </a>
       </div>
@@ -1049,7 +1050,7 @@ select option{background:var(--bg2);color:var(--text)}
 // Stripe live publishable key (admin@holyrentals.com)
 const STRIPE_PK = 'pk_live_JbJRtjb23Aujij7TTHOft6jR008MOj8TLY';
 // TODO: Replace with a real Payment Link from dashboard.stripe.com/payment-links
-const STRIPE_PAYMENT_LINK = 'https://stripe.com'; // PLACEHOLDER — create Payment Link on Stripe dashboard
+// Card payments handled via PayPal (accepts Visa/MC without account)
 
 // ─── STATE ───────────────────────────────────────────────
 const state = {
@@ -1357,23 +1358,30 @@ function proceedToPayment() {
   document.getElementById('cf-subject').value = '[DEVIS ' + ref + '] ' + name + ' — ' + fmtPrice(r.price);
   document.getElementById('cf-message').value = 'Bonjour,\n\nJe souhaite procéder au paiement du devis ' + ref + ' d\'un montant de ' + fmtPrice(r.price) + '.\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nMerci de confirmer les modalités de paiement.';
 
-  // Virement mailto link
-  const subject = encodeURIComponent('[VIREMENT] Devis ' + ref + ' — ' + fmtPrice(r.price));
-  const body = encodeURIComponent('Bonjour,\n\nJe confirme mon virement pour le devis ' + ref + '.\n\nMontant total : ' + fmtPrice(r.price) + '\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nVirement effectué vers :\nIBAN : DE12 2022 0800 0040 5812 62\nBIC : SXPYDEHH\nBénéficiaire : David Amore\n\nCordialement,\n' + name);
-  document.getElementById('pay-virement-link').href = 'mailto:dreamnovaultimate@gmail.com?subject=' + subject + '&body=' + body;
+  // PayPal link with dynamic amount (acompte 40%)
+  var paypalURL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_xclick'
+    + '&business=amoredavid46%40gmail.com'
+    + '&currency_code=EUR'
+    + '&item_name=' + encodeURIComponent('Devis ' + ref + ' — Acompte 40%')
+    + '&amount=' + acompte;
+  document.getElementById('pay-paypal-link').href = paypalURL;
+
+  // Card payment also via PayPal (accepts Visa/MC without PayPal account)
+  var cardURL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_xclick'
+    + '&business=amoredavid46%40gmail.com'
+    + '&currency_code=EUR'
+    + '&item_name=' + encodeURIComponent('Devis ' + ref + ' — Paiement CB')
+    + '&amount=' + acompte;
+  document.getElementById('pay-card-link').href = cardURL;
 }
 
-function openStripe() {
-  if (STRIPE_PAYMENT_LINK === 'https://stripe.com' || STRIPE_PAYMENT_LINK.includes('placeholder')) {
-    const ref = document.getElementById('q-ref').textContent;
-    const name = (document.getElementById('fname').value + ' ' + document.getElementById('lname').value).trim();
-    const email = document.getElementById('email').value;
-    const subj = encodeURIComponent('[PAIEMENT CB] Devis ' + ref + ' — ' + name);
-    const body = encodeURIComponent('Bonjour,\n\nJe souhaite payer par carte le devis ' + ref + '.\nMerci de m\'envoyer un lien de paiement Stripe.\n\n' + name + '\n' + email);
-    window.open('mailto:dreamnovaultimate@gmail.com?subject=' + subj + '&body=' + body, '_blank');
-    return;
-  }
-  window.open(STRIPE_PAYMENT_LINK, '_blank');
+function copyIBAN() {
+  navigator.clipboard.writeText('DE12202208000040581262').then(function() {
+    document.getElementById('iban-copied').style.display = 'block';
+    setTimeout(function() { document.getElementById('iban-copied').style.display = 'none'; }, 3000);
+  }).catch(function() {
+    prompt('Copiez cet IBAN :', 'DE12202208000040581262');
+  });
 }
 
 function handleFormSubmit(e) {

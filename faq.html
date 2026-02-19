@@ -237,7 +237,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </main>
 
 <a href="devis.html" class="floating-cta" id="floatingCta" data-i18n="floating_cta">💰 Obtenir un devis</a>
-<footer class="site-footer">
+
+    <!-- Newsletter CTA -->
+    <section class="newsletter-section" style="background:linear-gradient(135deg,rgba(212,175,55,0.06),rgba(28,25,23,0.5));border:1px solid rgba(212,175,55,0.2);border-radius:20px;padding:3rem 2rem;text-align:center;margin:4rem auto; max-width: 1400px; display: block;">
+      <div class="newsletter-eyebrow" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.25rem 0.9rem;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:20px;color:var(--gold);font-size:0.72rem;font-weight:600;font-family:var(--font-display);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem">📧 Restez informé</div>
+      <h2 class="newsletter-title" style="font-family:var(--font-display);font-size:clamp(1.5rem,4vw,2.25rem);font-weight:800;color:var(--text-primary);margin-bottom:0.75rem">Recevez nos offres & actualités</h2>
+      <p class="newsletter-sub" style="color:var(--text-secondary);max-width:480px;margin:0 auto 2rem;font-size:0.95rem">Nouvelles fonctionnalités, promotions exclusives et études de cas. Zéro spam.</p>
+      <form class="newsletter-form" action="https://formsubmit.co/dreamnovaultimate@gmail.com" method="POST" style="display:flex;gap:0.75rem;max-width:480px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+        <input type="hidden" name="_subject" value="Nouvelle inscription Waitlist/Newsletter">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="email" name="email" class="newsletter-input" placeholder="votre@email.com" required style="flex:1;min-width:220px;padding:0.75rem 1.25rem;background:rgba(12,10,9,0.8);border:1px solid rgba(245,158,11,0.18);border-radius:50px;color:#F5F5F4;font-family:Inter,sans-serif;font-size:0.9rem;outline:none;">
+        <button type="submit" class="newsletter-btn" style="padding:0.75rem 1.75rem;background:linear-gradient(135deg,#D4AF37,#F59E0B);color:#0C0A09;font-weight:700;font-family:'Space Grotesk',sans-serif;font-size:0.9rem;border:none;border-radius:50px;cursor:pointer;">S'inscrire →</button>
+      </form>
+    </section>
+\n<footer class="site-footer">
   <span class="nova-tam" data-i18n="footer.nova_tam">NOVA-TAM — Système Autonome CEO/CTO/COO</span>
   <span data-i18n="footer.bottom">Na Nach Nachma Nachman MeUman &nbsp;·&nbsp; DreamNova © 2026</span>
 </footer>

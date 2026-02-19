@@ -267,5 +267,9 @@
     "reassurance1": "Paiement sécurisé Stripe",
     "reassurance2": "Email de confirmation envoyé",
     "reassurance3": "Réponse garantie sous 24h"
+  },
+  "clients": {
+    "label": "Ils nous font confiance",
+    "title": "11 clients actifs | +82 projets | 5 langues"
   }
 }

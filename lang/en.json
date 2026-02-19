@@ -267,5 +267,9 @@
     "reassurance1": "Secure Stripe payment",
     "reassurance2": "Confirmation email sent",
     "reassurance3": "Guaranteed response within 24h"
+  },
+  "clients": {
+    "label": "They trust us",
+    "title": "11 active clients | 82+ projects | 5 languages"
   }
 }

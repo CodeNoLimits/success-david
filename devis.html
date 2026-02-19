@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamNova — Devis Instantané</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0C0A09;
+  --bg2: #1C1917;
+  --gold: #D4AF37;
+  --amber: #F59E0B;
+  --green: #10B981;
+  --text: #F5F5F4;
+  --muted: #A8A29E;
+  --border: rgba(245,158,11,0.2);
+  --card: rgba(28,25,23,0.9);
+  --glass: rgba(255,255,255,0.04);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* NAV */
+nav{display:flex;align-items:center;gap:8px;padding:16px 32px;background:rgba(12,10,9,0.95);border-bottom:1px solid var(--border);flex-wrap:wrap;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+nav a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;padding:6px 12px;border-radius:6px;transition:.2s;white-space:nowrap}
+nav a:hover{color:var(--amber);background:rgba(245,158,11,0.1)}
+nav a.active{color:var(--amber);background:rgba(245,158,11,0.15)}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--gold);margin-right:16px;letter-spacing:.05em}
+
+/* HERO */
+.hero{text-align:center;padding:60px 24px 40px;max-width:800px;margin:0 auto}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:700;line-height:1.15;background:linear-gradient(135deg,var(--gold),var(--amber),#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.hero p{color:var(--muted);font-size:16px;max-width:520px;margin:0 auto 32px;line-height:1.6}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--green);padding:6px 16px;border-radius:100px;font-size:13px;font-weight:500;margin-bottom:24px}
+.badge::before{content:'';width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* CALCULATOR */
+.calc-wrap{max-width:780px;margin:0 auto;padding:0 24px 80px}
+
+/* PROGRESS */
+.progress-bar{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:40px}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;flex:1;max-width:120px}
+.step-dot::after{content:'';position:absolute;top:16px;left:60%;width:80%;height:2px;background:var(--border);z-index:0}
+.step-dot:last-child::after{display:none}
+.dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);z-index:1;transition:.3s}
+.step-dot.active .dot{border-color:var(--amber);background:rgba(245,158,11,0.15);color:var(--amber)}
+.step-dot.done .dot{border-color:var(--green);background:rgba(16,185,129,0.15);color:var(--green)}
+.step-label{font-size:11px;color:var(--muted);text-align:center;transition:.3s}
+.step-dot.active .step-label{color:var(--amber)}
+.step-dot.done .step-label{color:var(--green)}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;backdrop-filter:blur(8px);margin-bottom:24px}
+.card-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.card-sub{color:var(--muted);font-size:14px;margin-bottom:28px;line-height:1.5}
+
+/* OPTIONS GRID */
+.options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.option-card{border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.2s;background:var(--glass);position:relative}
+.option-card:hover{border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.05)}
+.option-card.selected{border-color:var(--amber);background:rgba(245,158,11,0.1)}
+.option-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;color:var(--amber);font-size:14px;font-weight:700}
+.option-icon{font-size:24px;margin-bottom:8px}
+.option-title{font-weight:600;font-size:14px;margin-bottom:4px}
+.option-desc{font-size:12px;color:var(--muted);line-height:1.4}
+.option-price{font-size:11px;color:var(--amber);margin-top:6px;font-weight:500}
+
+/* FEATURES MULTI-SELECT */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:24px}
+.feature-toggle{border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:10px;background:var(--glass)}
+.feature-toggle:hover{border-color:rgba(245,158,11,0.4)}
+.feature-toggle.selected{border-color:var(--amber);background:rgba(245,158,11,0.1)}
+.feature-toggle .icon{font-size:18px;width:24px;text-align:center}
+.feature-toggle .info{flex:1}
+.feature-toggle .fname{font-size:13px;font-weight:500}
+.feature-toggle .fadd{font-size:11px;color:var(--amber);margin-top:2px}
+
+/* FORM */
+.form-group{margin-bottom:20px}
+label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:8px}
+input,textarea,select{width:100%;background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:.2s}
+input:focus,textarea:focus,select:focus{border-color:var(--amber);background:rgba(245,158,11,0.05)}
+textarea{resize:vertical;min-height:100px}
+select option{background:var(--bg2);color:var(--text)}
+
+/* PRICE DISPLAY */
+.price-live{background:linear-gradient(135deg,rgba(212,175,55,0.1),rgba(245,158,11,0.05));border:1px solid rgba(212,175,55,0.3);border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.price-label{font-size:13px;color:var(--muted)}
+.price-amount{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:var(--gold)}
+.price-range{font-size:12px;color:var(--muted);margin-top:4px}
+.price-tier{display:inline-block;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;margin-top:8px}
+.tier-petit{background:rgba(16,185,129,0.15);color:var(--green)}
+.tier-moyen{background:rgba(245,158,11,0.15);color:var(--amber)}
+.tier-grand{background:rgba(139,92,246,0.15);color:#A78BFA}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+.btn{padding:12px 28px;border-radius:10px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--amber));color:#0C0A09}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-secondary{background:var(--glass);border:1px solid var(--border);color:var(--text)}
+.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
+
+/* QUOTE RESULT */
+#result-section{display:none}
+.quote-card{background:var(--card);border:1px solid rgba(212,175,55,0.4);border-radius:16px;padding:40px;margin-bottom:24px}
+.quote-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;flex-wrap:wrap;gap:16px}
+.quote-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;color:var(--gold)}
+.quote-meta{text-align:right;font-size:13px;color:var(--muted)}
+.quote-title{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;margin-bottom:8px;color:var(--text)}
+.quote-client{font-size:15px;color:var(--muted);margin-bottom:32px}
+.quote-divider{border:none;border-top:1px solid var(--border);margin:24px 0}
+.line-items{width:100%;border-collapse:collapse;margin-bottom:24px}
+.line-items th{text-align:left;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;padding:8px 0;border-bottom:1px solid var(--border)}
+.line-items td{padding:12px 0;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.line-items td:last-child,.line-items th:last-child{text-align:right}
+.total-row td{font-weight:700;font-size:18px;color:var(--gold);border-bottom:none;padding-top:20px}
+.quote-note{font-size:13px;color:var(--muted);line-height:1.6;background:rgba(245,158,11,0.04);border-left:3px solid var(--amber);padding:16px;border-radius:0 8px 8px 0;margin-bottom:24px}
+.quote-footer{font-size:12px;color:var(--muted);text-align:center;margin-top:32px}
+
+/* SCORE CARD */
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px}
+.score-item{background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:14px}
+.score-item-label{font-size:12px;color:var(--muted);margin-bottom:6px}
+.score-item-val{font-size:15px;font-weight:600;color:var(--text)}
+.score-item-val.good{color:var(--green)}
+.score-item-val.warn{color:var(--amber)}
+
+@media print{
+  nav,.btn-row,.btn,.progress-bar,#step1,#step2,#step3,#step4,.calc-info,.hero{display:none!important}
+  body{background:#fff;color:#000}
+  .quote-card{border:2px solid #D4AF37;box-shadow:none;background:#fff;color:#000}
+  .quote-logo,.quote-title,.total-row td{color:#D4AF37}
+  .muted,.quote-meta,.line-items th,.quote-footer,.quote-note{color:#666}
+  .line-items td{border-color:#eee;color:#333}
+  .quote-divider{border-color:#eee}
+}
+@media(max-width:600px){
+  nav{padding:12px 16px}
+  .hero{padding:40px 16px 24px}
+  .card{padding:20px}
+  .options-grid{grid-template-columns:1fr 1fr}
+  .features-grid{grid-template-columns:1fr 1fr}
+  .price-live{flex-direction:column;gap:8px}
+  .btn-row{justify-content:stretch}
+  .btn{flex:1;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">⬡ DREAM NOVA</span>
+  <a href="index.html">🏠 Centre</a>
+  <a href="ceo-global.html">👑 CEO Global</a>
+  <a href="cto-global.html">⚙️ CTO Global</a>
+  <a href="coo-global.html">🔄 COO Global</a>
+  <a href="ceo-pmg.html">📊 CEO PMG</a>
+  <a href="cto-pmg.html">🔧 CTO PMG</a>
+  <a href="coo-pmg.html">📋 COO PMG</a>
+  <a href="devis.html" class="active">💰 Devis</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">⚡ Devis instantané — 0 API — 100% autonome</div>
+  <h1>Votre Devis en 60 Secondes</h1>
+  <p>Calculateur intelligent basé sur la méthodologie DreamNova. Obtenez une estimation précise de votre projet IA & web sans attendre.</p>
+</div>
+
+<div class="calc-wrap">
+
+  <!-- Progress -->
+  <div class="progress-bar">
+    <div class="step-dot active" id="pd1"><div class="dot">1</div><div class="step-label">Projet</div></div>
+    <div class="step-dot" id="pd2"><div class="dot">2</div><div class="step-label">Fonctionnalités</div></div>
+    <div class="step-dot" id="pd3"><div class="dot">3</div><div class="step-label">Délai</div></div>
+    <div class="step-dot" id="pd4"><div class="dot">4</div><div class="step-label">Contact</div></div>
+  </div>
+
+  <!-- STEP 1 — Type de projet -->
+  <div id="step1">
+    <div class="card">
+      <div class="card-title">Quel type de projet ?</div>
+      <div class="card-sub">Sélectionnez la catégorie qui correspond le mieux à votre besoin</div>
+      <div class="options-grid" id="project-types">
+        <div class="option-card" data-type="landing" data-base="400" data-days="1" onclick="selectType(this)">
+          <div class="option-icon">🚀</div>
+          <div class="option-title">Landing Page</div>
+          <div class="option-desc">Page de présentation, site vitrine simple, page de vente</div>
+          <div class="option-price">Dès 400€ · 24h</div>
+        </div>
+        <div class="option-card" data-type="ecommerce" data-base="1800" data-days="7" onclick="selectType(this)">
+          <div class="option-icon">🛒</div>
+          <div class="option-title">E-commerce</div>
+          <div class="option-desc">Boutique en ligne, catalogue produits, paiements intégrés</div>
+          <div class="option-price">Dès 1 800€ · 1 semaine</div>
+        </div>
+        <div class="option-card" data-type="saas" data-base="2800" data-days="14" onclick="selectType(this)">
+          <div class="option-icon">⚙️</div>
+          <div class="option-title">SaaS MVP</div>
+          <div class="option-desc">Tableau de bord, authentification, abonnements, BDD</div>
+          <div class="option-price">Dès 2 800€ · 2 semaines</div>
+        </div>
+        <div class="option-card" data-type="automation" data-base="600" data-days="2" onclick="selectType(this)">
+          <div class="option-icon">🤖</div>
+          <div class="option-title">Automatisation IA</div>
+          <div class="option-desc">Scripts, pipelines IA, traitement voix/image, bots</div>
+          <div class="option-price">Dès 600€ · 2 jours</div>
+        </div>
+        <div class="option-card" data-type="mobile" data-base="3500" data-days="21" onclick="selectType(this)">
+          <div class="option-icon">📱</div>
+          <div class="option-title">App Mobile</div>
+          <div class="option-desc">Application iOS/Android, React Native, PWA avancée</div>
+          <div class="option-price">Dès 3 500€ · 3 semaines</div>
+        </div>
+        <div class="option-card" data-type="ecosystem" data-base="6000" data-days="45" onclick="selectType(this)">
+          <div class="option-icon">🌐</div>
+          <div class="option-title">Écosystème Complet</div>
+          <div class="option-desc">Multi-services, intégrations multiples, infrastructure IA</div>
+          <div class="option-price">Dès 6 000€ · 6 semaines+</div>
+        </div>
+        <div class="option-card" data-type="chatbot" data-base="900" data-days="3" onclick="selectType(this)">
+          <div class="option-icon">💬</div>
+          <div class="option-title">Chatbot / Agent IA</div>
+          <div class="option-desc">Assistant IA personnalisé, RAG sur vos données, multilingue</div>
+          <div class="option-price">Dès 900€ · 3 jours</div>
+        </div>
+        <div class="option-card" data-type="fix" data-base="150" data-days="0.5" onclick="selectType(this)">
+          <div class="option-icon">🔧</div>
+          <div class="option-title">Fix & Optimisation</div>
+          <div class="option-desc">Correction bug, optimisation performance, audit Lighthouse</div>
+          <div class="option-price">Dès 150€ · quelques heures</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="goStep(2)">Continuer →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 — Fonctionnalités -->
+  <div id="step2" style="display:none">
+    <div class="card">
+      <div class="card-title">Quelles fonctionnalités ?</div>
+      <div class="card-sub">Sélectionnez tout ce dont vous avez besoin (plusieurs choix possibles)</div>
+      <div class="features-grid">
+        <div class="feature-toggle" data-add="400" onclick="toggleFeature(this)"><span class="icon">🔐</span><div class="info"><div class="fname">Authentification</div><div class="fadd">+400€</div></div></div>
+        <div class="feature-toggle" data-add="500" onclick="toggleFeature(this)"><span class="icon">💳</span><div class="info"><div class="fname">Paiement en ligne</div><div class="fadd">+500€</div></div></div>
+        <div class="feature-toggle" data-add="350" onclick="toggleFeature(this)"><span class="icon">🛠️</span><div class="info"><div class="fname">Dashboard admin</div><div class="fadd">+350€</div></div></div>
+        <div class="feature-toggle" data-add="250" onclick="toggleFeature(this)"><span class="icon">🌍</span><div class="info"><div class="fname">Multilingue</div><div class="fadd">+250€</div></div></div>
+        <div class="feature-toggle" data-add="600" onclick="toggleFeature(this)"><span class="icon">🧠</span><div class="info"><div class="fname">IA / LLM intégré</div><div class="fadd">+600€</div></div></div>
+        <div class="feature-toggle" data-add="300" onclick="toggleFeature(this)"><span class="icon">📝</span><div class="info"><div class="fname">CMS / Blog</div><div class="fadd">+300€</div></div></div>
+        <div class="feature-toggle" data-add="350" onclick="toggleFeature(this)"><span class="icon">🔌</span><div class="info"><div class="fname">API externe</div><div class="fadd">+350€</div></div></div>
+        <div class="feature-toggle" data-add="200" onclick="toggleFeature(this)"><span class="icon">📊</span><div class="info"><div class="fname">Analytics avancés</div><div class="fadd">+200€</div></div></div>
+        <div class="feature-toggle" data-add="400" onclick="toggleFeature(this)"><span class="icon">📧</span><div class="info"><div class="fname">Emails transac.</div><div class="fadd">+400€</div></div></div>
+        <div class="feature-toggle" data-add="500" onclick="toggleFeature(this)"><span class="icon">🗄️</span><div class="info"><div class="fname">Base de données</div><div class="fadd">+500€</div></div></div>
+        <div class="feature-toggle" data-add="450" onclick="toggleFeature(this)"><span class="icon">🔔</span><div class="info"><div class="fname">Notifications push</div><div class="fadd">+450€</div></div></div>
+        <div class="feature-toggle" data-add="300" onclick="toggleFeature(this)"><span class="icon">📱</span><div class="info"><div class="fname">PWA / Mobile first</div><div class="fadd">+300€</div></div></div>
+        <div class="feature-toggle" data-add="250" onclick="toggleFeature(this)"><span class="icon">🔍</span><div class="info"><div class="fname">SEO avancé</div><div class="fadd">+250€</div></div></div>
+        <div class="feature-toggle" data-add="350" onclick="toggleFeature(this)"><span class="icon">🎨</span><div class="info"><div class="fname">Design sur mesure</div><div class="fadd">+350€</div></div></div>
+      </div>
+
+      <div class="price-live">
+        <div>
+          <div class="price-label">Estimation en cours</div>
+          <div class="price-amount" id="live-price">—</div>
+          <div class="price-range" id="live-range"></div>
+          <span class="price-tier" id="live-tier"></span>
+        </div>
+        <div style="text-align:right">
+          <div class="price-label">Délai estimé</div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:var(--text)" id="live-delay">—</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="goStep(1)">← Retour</button>
+        <button class="btn btn-primary" onclick="goStep(3)">Continuer →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 — Délai & budget -->
+  <div id="step3" style="display:none">
+    <div class="card">
+      <div class="card-title">Délai & contexte</div>
+      <div class="card-sub">Ces informations affinent votre estimation finale</div>
+
+      <div class="form-group">
+        <label>Urgence du projet</label>
+        <div class="options-grid" style="margin-bottom:0">
+          <div class="option-card" data-urgency="1.0" onclick="selectUrgency(this)">
+            <div class="option-icon">🌿</div>
+            <div class="option-title">Flexible</div>
+            <div class="option-desc">Pas de deadline fixe</div>
+            <div class="option-price">Tarif standard</div>
+          </div>
+          <div class="option-card" data-urgency="1.2" onclick="selectUrgency(this)">
+            <div class="option-icon">📅</div>
+            <div class="option-title">Dans 1–2 semaines</div>
+            <div class="option-desc">Planning raisonnable</div>
+            <div class="option-price">+20% rapidité</div>
+          </div>
+          <div class="option-card" data-urgency="1.45" onclick="selectUrgency(this)">
+            <div class="option-icon">⚡</div>
+            <div class="option-title">Cette semaine</div>
+            <div class="option-desc">Priorité absolue</div>
+            <div class="option-price">+45% urgent</div>
+          </div>
+          <div class="option-card" data-urgency="1.7" onclick="selectUrgency(this)">
+            <div class="option-icon">🚨</div>
+            <div class="option-title">Maintenant</div>
+            <div class="option-desc">Livraison < 24–48h</div>
+            <div class="option-price">+70% express</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:20px">
+        <label>Description courte du projet (optionnel)</label>
+        <textarea id="project-desc" placeholder="Ex: Application de gestion des commandes pour une boulangerie, avec paiement CB et notifications SMS..."></textarea>
+      </div>
+
+      <div class="price-live">
+        <div>
+          <div class="price-label">Estimation finale</div>
+          <div class="price-amount" id="final-price">—</div>
+          <span class="price-tier" id="final-tier"></span>
+        </div>
+        <div style="text-align:right">
+          <div class="price-label">Délai estimé</div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:var(--text)" id="final-delay">—</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px" id="final-note"></div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="goStep(2)">← Retour</button>
+        <button class="btn btn-primary" onclick="goStep(4)">Recevoir le devis →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 — Contact -->
+  <div id="step4" style="display:none">
+    <div class="card">
+      <div class="card-title">Vos coordonnées</div>
+      <div class="card-sub">Pour recevoir votre devis détaillé et être contacté par l'équipe DreamNova</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label>Prénom *</label>
+          <input type="text" id="fname" placeholder="David">
+        </div>
+        <div class="form-group">
+          <label>Nom *</label>
+          <input type="text" id="lname" placeholder="Martin">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" id="email" placeholder="david@entreprise.com">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp / Téléphone</label>
+        <input type="tel" id="phone" placeholder="+33 6 00 00 00 00">
+      </div>
+      <div class="form-group">
+        <label>Entreprise / Projet</label>
+        <input type="text" id="company" placeholder="Ma Startup">
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="goStep(3)">← Retour</button>
+        <button class="btn btn-primary" onclick="generateQuote()">✨ Générer mon devis</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-section">
+    <div class="quote-card" id="quote-print">
+      <div class="quote-header">
+        <div>
+          <div class="quote-logo">⬡ DREAM NOVA</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">Système CEO/CTO/COO Autonome</div>
+        </div>
+        <div class="quote-meta">
+          <div id="q-date"></div>
+          <div id="q-ref" style="color:var(--amber);font-weight:600;margin-top:4px"></div>
+        </div>
+      </div>
+
+      <div class="quote-title" id="q-title"></div>
+      <div class="quote-client" id="q-client"></div>
+
+      <hr class="quote-divider">
+
+      <table class="line-items">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Montant</th>
+          </tr>
+        </thead>
+        <tbody id="q-lines"></tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td>TOTAL ESTIMÉ</td>
+            <td id="q-total"></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="quote-note" id="q-note"></div>
+
+      <div class="score-grid" id="q-scores"></div>
+
+      <hr class="quote-divider">
+      <div class="quote-footer">
+        DreamNova · dreamnovaultimate@gmail.com · Jerusalem, Israël<br>
+        Ce devis est indicatif. Prix définitif après call de découverte gratuit (30 min).<br>
+        Validité : 30 jours · Acompte 40% à la signature · Solde à la livraison
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="restart()">← Nouveau devis</button>
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Imprimer / Sauvegarder PDF</button>
+    </div>
+  </div>
+
+</div><!-- /calc-wrap -->
+
+<script>
+// ─── STATE ───────────────────────────────────────────────
+const state = {
+  type: null, basePrice: 0, baseDays: 0,
+  features: [], featuresTotal: 0,
+  urgency: 1.0, urgencyLabel: 'Standard',
+  description: ''
+};
+
+// ─── STEP NAVIGATION ──────────────────────────────────────
+function goStep(n) {
+  if (n === 2 && !state.type) { alert('Sélectionnez un type de projet.'); return; }
+  if (n === 3 && state.urgency === null) state.urgency = 1.0;
+  [1,2,3,4].forEach(i => {
+    document.getElementById('step'+i).style.display = i===n ? 'block' : 'none';
+  });
+  ['pd1','pd2','pd3','pd4'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('active','done');
+    if (i+1 === n) el.classList.add('active');
+    else if (i+1 < n) el.classList.add('done');
+  });
+  updateLivePrices();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ─── TYPE SELECTION ───────────────────────────────────────
+function selectType(el) {
+  document.querySelectorAll('.option-card').forEach(c => {
+    if (c.dataset.type) c.classList.remove('selected');
+  });
+  el.classList.add('selected');
+  state.type = el.dataset.type;
+  state.basePrice = parseInt(el.dataset.base);
+  state.baseDays = parseFloat(el.dataset.days);
+}
+
+// ─── FEATURES ─────────────────────────────────────────────
+function toggleFeature(el) {
+  el.classList.toggle('selected');
+  state.features = [...document.querySelectorAll('.feature-toggle.selected')]
+    .map(f => ({ name: f.querySelector('.fname').textContent, add: parseInt(f.dataset.add) }));
+  state.featuresTotal = state.features.reduce((s,f) => s+f.add, 0);
+  updateLivePrices();
+}
+
+// ─── URGENCY ──────────────────────────────────────────────
+function selectUrgency(el) {
+  document.querySelectorAll('[data-urgency]').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.urgency = parseFloat(el.dataset.urgency);
+  state.urgencyLabel = el.querySelector('.option-title').textContent;
+  updateLivePrices();
+}
+
+// ─── PRICING ENGINE (100% local, 0 API) ──────────────────
+function calcPrice() {
+  if (!state.basePrice) return { price: 0, min: 0, max: 0, days: 0, tier: '' };
+  const sub = state.basePrice + state.featuresTotal;
+  const final = Math.round(sub * state.urgency / 50) * 50;
+  const tier = final < 500 ? 'PETIT' : final < 5000 ? 'MOYEN' : 'GRAND';
+  const days = Math.ceil(state.baseDays * (state.urgency < 1.2 ? 1 : 0.7));
+  return {
+    price: final,
+    min: Math.round(final * 0.85 / 50) * 50,
+    max: Math.round(final * 1.25 / 50) * 50,
+    days: days,
+    tier: tier,
+    tierClass: tier === 'PETIT' ? 'tier-petit' : tier === 'MOYEN' ? 'tier-moyen' : 'tier-grand'
+  };
+}
+
+function fmtPrice(n) {
+  return n.toLocaleString('fr-FR') + ' €';
+}
+function fmtDays(d) {
+  if (d < 1) return '< 24h';
+  if (d === 1) return '1 jour';
+  if (d < 7) return d + ' jours';
+  if (d < 14) return '1 semaine';
+  if (d < 30) return Math.ceil(d/7) + ' semaines';
+  return Math.ceil(d/30) + ' mois';
+}
+
+function updateLivePrices() {
+  const r = calcPrice();
+  if (!r.price) return;
+
+  const lp = document.getElementById('live-price');
+  const lr = document.getElementById('live-range');
+  const lt = document.getElementById('live-tier');
+  const ld = document.getElementById('live-delay');
+  if (lp) { lp.textContent = fmtPrice(r.price); }
+  if (lr) { lr.textContent = 'Fourchette : '+fmtPrice(r.min)+' – '+fmtPrice(r.max); }
+  if (lt) { lt.textContent = r.tier; lt.className='price-tier '+r.tierClass; }
+  if (ld) { ld.textContent = fmtDays(r.days); }
+
+  const fp = document.getElementById('final-price');
+  const ft = document.getElementById('final-tier');
+  const fd = document.getElementById('final-delay');
+  const fn = document.getElementById('final-note');
+  if (fp) { fp.textContent = fmtPrice(r.price); }
+  if (ft) { ft.textContent = r.tier; ft.className='price-tier '+r.tierClass; }
+  if (fd) { fd.textContent = fmtDays(r.days); }
+  if (fn) { fn.textContent = state.urgency > 1.2 ? '⚡ Supplément urgence inclus' : ''; }
+}
+
+// ─── GENERATE QUOTE ───────────────────────────────────────
+function generateQuote() {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!fname || !email) { alert('Prénom et email obligatoires.'); return; }
+
+  const r = calcPrice();
+  const desc = document.getElementById('project-desc').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const ref = 'DN-' + Date.now().toString(36).toUpperCase();
+  const now = new Date().toLocaleDateString('fr-FR',{year:'numeric',month:'long',day:'numeric'});
+
+  const typeLabels = {
+    landing:'Landing Page','ecommerce':'E-commerce',saas:'SaaS MVP',
+    automation:'Automatisation IA',mobile:'App Mobile',
+    ecosystem:'Écosystème Complet',chatbot:'Chatbot / Agent IA',fix:'Fix & Optimisation'
+  };
+
+  // Fill quote
+  document.getElementById('q-date').textContent = now;
+  document.getElementById('q-ref').textContent = ref;
+  document.getElementById('q-title').textContent = 'Devis — ' + (typeLabels[state.type]||state.type);
+  document.getElementById('q-client').textContent =
+    (fname+' '+lname).trim() + (company ? ' · '+company : '') +
+    ' · '+email + (phone ? ' · '+phone : '');
+
+  // Line items
+  let lines = `<tr><td>${typeLabels[state.type]||state.type}${desc?'<br><small style="color:var(--muted)">'+desc+'</small>':''}</td><td>${fmtPrice(state.basePrice)}</td></tr>`;
+  state.features.forEach(f => {
+    lines += `<tr><td>${f.name}</td><td>+${fmtPrice(f.add)}</td></tr>`;
+  });
+  if (state.urgency > 1.0) {
+    const surcharge = Math.round((state.basePrice+state.featuresTotal)*(state.urgency-1)/50)*50;
+    lines += `<tr><td>Supplément urgence (${state.urgencyLabel})</td><td>+${fmtPrice(surcharge)}</td></tr>`;
+  }
+  document.getElementById('q-lines').innerHTML = lines;
+  document.getElementById('q-total').textContent = fmtPrice(r.price);
+
+  // Note
+  const notes = {
+    PETIT: '✅ Projet classifié PETIT — livrable rapidement. Acompte 40% à la commande, solde à la livraison. Pas de contrat formel requis.',
+    MOYEN: '📋 Projet classifié MOYEN — inclut un point de validation à mi-parcours et un README client complet. Devis détaillé à signer.',
+    GRAND: '🤝 Projet classifié GRAND — contrat signé + acompte 40% requis avant démarrage. Rapports hebdomadaires + handover pack complet.'
+  };
+  document.getElementById('q-note').textContent = (notes[r.tier]||'') + '\n\nFourchette réaliste : '+fmtPrice(r.min)+' – '+fmtPrice(r.max)+'. Tarif définitif après découverte gratuite (30 min).';
+
+  // Score grid (Cash-First scoring)
+  const scores = [
+    { label: 'Classification', val: r.tier, cls: r.tierClass.replace('tier-','') },
+    { label: 'Délai estimé', val: fmtDays(r.days), cls: 'good' },
+    { label: 'Urgence', val: state.urgencyLabel, cls: state.urgency>1.4?'warn':'good' },
+    { label: 'Fonctionnalités', val: state.features.length + ' option(s)', cls: 'good' },
+  ];
+  document.getElementById('q-scores').innerHTML = scores.map(s =>
+    `<div class="score-item"><div class="score-item-label">${s.label}</div><div class="score-item-val ${s.cls}">${s.val}</div></div>`
+  ).join('');
+
+  // Show result
+  document.getElementById('step4').style.display = 'none';
+  document.getElementById('result-section').style.display = 'block';
+  ['pd1','pd2','pd3','pd4'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('active');
+    el.classList.add('done');
+  });
+  window.scrollTo({top:200,behavior:'smooth'});
+}
+
+function restart() {
+  // Reset state
+  state.type=null; state.basePrice=0; state.baseDays=0;
+  state.features=[]; state.featuresTotal=0; state.urgency=1.0;
+  document.querySelectorAll('.option-card,.feature-toggle').forEach(el=>el.classList.remove('selected'));
+  document.querySelectorAll('input,textarea').forEach(el=>el.value='');
+  document.getElementById('result-section').style.display='none';
+  goStep(1);
+}
+</script>
+</body>
+</html>

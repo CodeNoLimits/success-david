@@ -147,6 +147,417 @@ select option{background:var(--bg2);color:var(--text)}
   .btn-row{justify-content:stretch}
   .btn{flex:1;justify-content:center}
 }
+
+/* ═══ CONTRACT SECTION ═══════════════════════════════════ */
+.contract-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.contract-step-badge {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background: rgba(212,175,55,0.1);
+  border: 1px solid rgba(212,175,55,0.35);
+  border-radius: 20px;
+  color: var(--amber);
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.contract-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.contract-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.contract-card {
+  background: var(--card);
+  border: 1px solid rgba(212,175,55,0.35);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(8px);
+}
+
+.contract-logo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contract-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.contract-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.6;
+}
+
+.contract-parties {
+  background: rgba(245,158,11,0.05);
+  border: 1px solid rgba(245,158,11,0.15);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.contract-parties strong { color: var(--text); }
+
+.cgv-article {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.cgv-article:last-of-type { border-bottom: none; }
+
+.cgv-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.cgv-article p {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+
+.cgv-article ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.cgv-article ul li {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 0.3rem;
+}
+
+.cgv-sign-block {
+  background: rgba(16,185,129,0.05);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.cgv-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.cgv-check-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: #10B981;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.cgv-signature label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.cgv-signature input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+  transition: .2s;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.cgv-signature input:focus {
+  border-color: #10B981;
+  background: rgba(16,185,129,0.05);
+}
+
+.cgv-sign-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+.btn-sign {
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .2s;
+  letter-spacing: 0.02em;
+}
+
+.btn-sign:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-sign:not(:disabled):hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(16,185,129,0.3);
+}
+
+/* ═══ PAYMENT SECTION ════════════════════════════════════ */
+.payment-amount-bar {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(212,175,55,0.07);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  color: var(--muted);
+  display: inline-block;
+}
+
+.payment-amount-bar strong { color: var(--text); }
+
+.payment-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+@media(max-width:750px) { .payment-cards { grid-template-columns: 1fr; } }
+
+.payment-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: .3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.payment-card:hover {
+  border-color: rgba(245,158,11,0.45);
+  box-shadow: 0 8px 32px rgba(212,175,55,0.1);
+  transform: translateY(-3px);
+}
+
+.payment-card-featured {
+  border-color: rgba(212,175,55,0.4);
+  box-shadow: 0 4px 20px rgba(212,175,55,0.12);
+}
+
+.pay-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 14px;
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  color: #0C0A09;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pay-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.pay-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pay-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.pay-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: .2s;
+}
+
+.pay-btn-bank {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.pay-btn-bank:hover { border-color: var(--amber); color: var(--amber); }
+
+.pay-btn-stripe {
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  color: #0C0A09;
+}
+
+.pay-btn-stripe:hover { opacity: 0.9; transform: translateY(-1px); }
+
+.pay-btn-paypal {
+  background: #003087;
+  color: #fff;
+}
+
+.pay-btn-paypal:hover { background: #0040b0; }
+
+/* Contact form */
+.contact-form-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.contact-form-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.cf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media(max-width:600px) { .cf-row { grid-template-columns: 1fr; } }
+
+.cf-group {
+  margin-bottom: 1rem;
+}
+
+.cf-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.cf-group input,
+.cf-group textarea {
+  width: 100%;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: .2s;
+}
+
+.cf-group input:focus,
+.cf-group textarea:focus {
+  border-color: var(--amber);
+  background: rgba(245,158,11,0.05);
+}
+
+.cf-group textarea { resize: vertical; min-height: 80px; }
+
+.cf-submit {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--gold), var(--amber));
+  color: #0C0A09;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.cf-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
 </style>
 </head>
 <body>
@@ -177,6 +588,8 @@ select option{background:var(--bg2);color:var(--text)}
     <div class="step-dot" id="pd2"><div class="dot">2</div><div class="step-label">Fonctionnalités</div></div>
     <div class="step-dot" id="pd3"><div class="dot">3</div><div class="step-label">Délai</div></div>
     <div class="step-dot" id="pd4"><div class="dot">4</div><div class="step-label">Contact</div></div>
+    <div class="step-dot" id="pd5"><div class="dot">5</div><div class="step-label">Contrat</div></div>
+    <div class="step-dot" id="pd6"><div class="dot">6</div><div class="step-label">Paiement</div></div>
   </div>
 
   <!-- STEP 1 — Type de projet -->
@@ -429,12 +842,191 @@ select option{background:var(--bg2);color:var(--text)}
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="restart()">← Nouveau devis</button>
       <button class="btn btn-primary" onclick="window.print()">🖨️ Imprimer / Sauvegarder PDF</button>
+      <button class="btn btn-primary" onclick="scrollToContract()" style="background:linear-gradient(135deg,#10B981,#059669);color:#fff;">📋 Signer &amp; Procéder →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       STEP 5 — CONTRACT (CGV + Signature)
+  ════════════════════════════════════════════════════ -->
+  <div id="contract-section" style="display:none">
+    <div class="contract-header">
+      <div class="contract-step-badge">Étape 5 — Contrat</div>
+      <h2 class="contract-title">Conditions Générales de Vente</h2>
+      <p class="contract-sub">Lisez attentivement les CGV avant de signer</p>
+    </div>
+
+    <div class="contract-card" id="contract-doc">
+      <div class="contract-logo-row">
+        <div class="contract-logo">⬡ DREAM NOVA</div>
+        <div class="contract-meta">
+          <div>dreamnovaultimate@gmail.com</div>
+          <div>Jerusalem, Israël · Réf : <span id="c-ref"></span></div>
+          <div>Date : <span id="c-date"></span></div>
+        </div>
+      </div>
+
+      <div class="contract-parties">
+        <div><strong>Prestataire :</strong> DreamNova (David Amor) — dreamnovaultimate@gmail.com — Jerusalem, Israël</div>
+        <div><strong>Client :</strong> <span id="c-client-name"></span> — <span id="c-client-email"></span></div>
+        <div><strong>Projet :</strong> <span id="c-project"></span></div>
+        <div><strong>Montant :</strong> <span id="c-amount"></span></div>
+      </div>
+
+      <div class="cgv-article">
+        <div class="cgv-title">Article 1 — Objet du contrat</div>
+        <p>Le présent contrat a pour objet de définir les conditions dans lesquelles DreamNova (ci-après "le Prestataire") s'engage à réaliser pour le Client les services de développement web, IA et automatisation décrits dans le devis ci-joint. Les prestations comprennent la conception, le développement, les tests et la livraison du projet selon le cahier des charges validé par les deux parties.</p>
+      </div>
+
+      <div class="cgv-article">
+        <div class="cgv-title">Article 2 — Prix et modalités de paiement</div>
+        <p>Le prix total de la prestation est celui indiqué dans le devis accepté. Le règlement s'effectue en deux versements :</p>
+        <ul>
+          <li><strong>Acompte de 40%</strong> dû à la signature du présent contrat et avant tout démarrage des travaux.</li>
+          <li><strong>Solde de 60%</strong> dû à la livraison finale du projet, avant remise des codes sources et accès.</li>
+        </ul>
+        <p>Les paiements sont acceptés par virement bancaire, Stripe ou PayPal. Tout retard de paiement entraîne des pénalités de 10% par mois de retard.</p>
+      </div>
+
+      <div class="cgv-article">
+        <div class="cgv-title">Article 3 — Délais de livraison</div>
+        <p>Les délais de livraison sont indiqués dans le devis à titre indicatif et démarrent à compter de la réception de l'acompte et de la validation complète du cahier des charges. Le Prestataire s'engage à respecter ces délais sauf cas de force majeure ou retards imputables au Client (délai de validation, fourniture tardive des contenus/médias). En cas de dépassement de délai imputable au Prestataire supérieur à 50% du délai estimé, le Client pourra demander une réduction de 5% sur le solde.</p>
+      </div>
+
+      <div class="cgv-article">
+        <div class="cgv-title">Article 4 — Propriété intellectuelle</div>
+        <p>Le Client devient propriétaire exclusif de l'intégralité des droits de propriété intellectuelle sur les créations réalisées dans le cadre de ce contrat (code source, design, textes) <strong>après règlement intégral du prix</strong>. Avant paiement complet, DreamNova conserve tous droits sur les livrables. Le Prestataire se réserve le droit de mentionner le projet dans son portfolio, sauf demande écrite de confidentialité du Client.</p>
+      </div>
+
+      <div class="cgv-article">
+        <div class="cgv-title">Article 5 — Confidentialité</div>
+        <p>Les parties s'engagent réciproquement à garder confidentielles toutes les informations échangées dans le cadre de ce contrat, qu'elles soient techniques, commerciales ou personnelles. Cette obligation de confidentialité est valable pendant toute la durée du contrat et pour une période de 3 ans après son expiration, sauf accord écrit contraire des parties.</p>
+      </div>
+
+      <div class="cgv-article">
+        <div class="cgv-title">Article 6 — Limitation de responsabilité</div>
+        <p>La responsabilité de DreamNova est limitée au montant total de la prestation telle que définie dans le devis. Le Prestataire ne saurait être tenu responsable des pertes indirectes, pertes de données, pertes de revenus ou préjudices immatériels consécutifs à une défaillance du service. Le Client est responsable des sauvegardes de ses données existantes avant le début de l'intervention.</p>
+      </div>
+
+      <div class="cgv-article">
+        <div class="cgv-title">Article 7 — Droit applicable et juridiction</div>
+        <p>Le présent contrat est soumis au <strong>droit israélien</strong>. En cas de litige ne pouvant être résolu à l'amiable dans un délai de 30 jours, les parties conviennent de soumettre le différend à la juridiction compétente de <strong>Jérusalem, Israël</strong>. Une tentative de médiation préalable est fortement encouragée avant toute action judiciaire.</p>
+      </div>
+
+      <div class="cgv-sign-block">
+        <label class="cgv-check-label">
+          <input type="checkbox" id="cgv-check" onchange="checkSignatureReady()">
+          <span>J'ai lu, compris et j'accepte les présentes Conditions Générales de Vente</span>
+        </label>
+
+        <div class="cgv-signature">
+          <label for="cgv-name">Signature électronique — Entrez votre nom complet :</label>
+          <input type="text" id="cgv-name" placeholder="Prénom Nom" oninput="checkSignatureReady()">
+          <div class="cgv-sign-note">En entrant votre nom, vous apposez votre signature électronique valant accord contractuel.</div>
+        </div>
+
+        <button class="btn-sign" id="btn-sign" disabled onclick="proceedToPayment()">
+          Signer et procéder au paiement →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       STEP 6 — PAYMENT
+  ════════════════════════════════════════════════════ -->
+  <div id="payment-section" style="display:none">
+    <div class="contract-header">
+      <div class="contract-step-badge" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#10B981;">Étape 6 — Paiement</div>
+      <h2 class="contract-title">Choisissez votre mode de paiement</h2>
+      <p class="contract-sub">Acompte de 40% requis pour démarrer · Solde à la livraison</p>
+      <div class="payment-amount-bar">
+        Montant total : <strong id="pay-total"></strong> &nbsp;·&nbsp;
+        Acompte 40% : <strong id="pay-acompte" style="color:#D4AF37"></strong> &nbsp;·&nbsp;
+        Solde 60% : <strong id="pay-solde"></strong>
+      </div>
+    </div>
+
+    <div class="payment-cards">
+      <!-- Virement bancaire -->
+      <div class="payment-card">
+        <div class="pay-icon">🏦</div>
+        <div class="pay-name">Virement bancaire</div>
+        <div class="pay-desc">Contactez-nous pour recevoir les coordonnées bancaires. Réponse sous 2h.</div>
+        <a id="pay-virement-link" class="pay-btn pay-btn-bank" href="#">
+          Contacter pour virement →
+        </a>
+      </div>
+
+      <!-- Stripe -->
+      <div class="payment-card payment-card-featured">
+        <div class="pay-badge">Recommandé</div>
+        <div class="pay-icon">💳</div>
+        <div class="pay-name">Paiement par carte</div>
+        <div class="pay-desc">Paiement sécurisé Stripe — CB, Visa, Mastercard, American Express.</div>
+        <button class="pay-btn pay-btn-stripe" onclick="openStripe()">
+          Payer par carte →
+        </button>
+      </div>
+
+      <!-- PayPal -->
+      <div class="payment-card">
+        <div class="pay-icon" style="font-size:2rem">🅿</div>
+        <div class="pay-name">PayPal</div>
+        <div class="pay-desc">Paiement via PayPal — compte ou carte bancaire acceptés.</div>
+        <a href="https://paypal.me/DreamNovaJerusalem" target="_blank" class="pay-btn pay-btn-paypal">
+          Payer via PayPal →
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact form -->
+    <div class="contact-form-wrap">
+      <div class="contact-form-title">Ou envoyez-nous un message directement</div>
+      <p class="contact-form-sub">Votre devis est pré-rempli. Nous vous répondons sous 2h ouvrées.</p>
+
+      <!-- FORMSPREE: Obtenez votre ID sur https://formspree.io — remplacez FORMSPREE_ID ci-dessous -->
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/FORMSPREE_ID" method="POST" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" name="_subject" id="cf-subject">
+        <input type="hidden" name="devis_ref" id="cf-devis-ref">
+        <input type="hidden" name="montant_total" id="cf-amount">
+
+        <div class="cf-row">
+          <div class="cf-group">
+            <label>Votre nom</label>
+            <input type="text" name="name" id="cf-name" required placeholder="Prénom Nom">
+          </div>
+          <div class="cf-group">
+            <label>Email</label>
+            <input type="email" name="email" id="cf-email" required placeholder="vous@exemple.com">
+          </div>
+        </div>
+
+        <div class="cf-group">
+          <label>Référence devis</label>
+          <input type="text" name="ref" id="cf-ref-display" readonly style="opacity:0.6;cursor:not-allowed">
+        </div>
+
+        <div class="cf-group">
+          <label>Message</label>
+          <textarea name="message" id="cf-message" rows="4" placeholder="Décrivez votre besoin ou posez vos questions..."></textarea>
+        </div>
+
+        <button type="submit" class="cf-submit">Envoyer le message →</button>
+        <div id="cf-success" style="display:none;color:#10B981;font-weight:600;margin-top:12px;text-align:center;">
+          Message envoyé ! Nous vous répondons sous 2h. Na Nach Nachman MeUman.
+        </div>
+      </form>
     </div>
   </div>
 
 </div><!-- /calc-wrap -->
 
 <script>
+// ─── PAYMENT CONFIG ──────────────────────────────────────
+// TODO: Replace with your real Stripe payment link from stripe.com/payment-links
+const STRIPE_PAYMENT_LINK = 'https://stripe.com'; // PLACEHOLDER — configure on Stripe dashboard
+
 // ─── STATE ───────────────────────────────────────────────
 const state = {
   type: null, basePrice: 0, baseDays: 0,
@@ -450,8 +1042,9 @@ function goStep(n) {
   [1,2,3,4].forEach(i => {
     document.getElementById('step'+i).style.display = i===n ? 'block' : 'none';
   });
-  ['pd1','pd2','pd3','pd4'].forEach((id,i) => {
+  ['pd1','pd2','pd3','pd4','pd5','pd6'].forEach((id,i) => {
     const el = document.getElementById(id);
+    if (!el) return;
     el.classList.remove('active','done');
     if (i+1 === n) el.classList.add('active');
     else if (i+1 < n) el.classList.add('done');
@@ -618,8 +1211,117 @@ function restart() {
   document.querySelectorAll('.option-card,.feature-toggle').forEach(el=>el.classList.remove('selected'));
   document.querySelectorAll('input,textarea').forEach(el=>el.value='');
   document.getElementById('result-section').style.display='none';
+  document.getElementById('contract-section').style.display='none';
+  document.getElementById('payment-section').style.display='none';
+  document.getElementById('cgv-check').checked = false;
+  document.getElementById('btn-sign').disabled = true;
   goStep(1);
 }
+
+// ─── CONTRACT & PAYMENT ──────────────────────────────────
+function scrollToContract() {
+  const cs = document.getElementById('contract-section');
+  cs.style.display = 'block';
+  // Update progress dots
+  ['pd1','pd2','pd3','pd4','pd5','pd6'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('active','done');
+    if (i === 4) el.classList.add('active');
+    else if (i < 4) el.classList.add('done');
+  });
+  cs.scrollIntoView({behavior:'smooth', block:'start'});
+  // Pre-fill contract fields
+  const r = calcPrice();
+  document.getElementById('c-ref').textContent = document.getElementById('q-ref').textContent;
+  document.getElementById('c-date').textContent = document.getElementById('q-date').textContent;
+  document.getElementById('c-client-name').textContent = (document.getElementById('fname').value + ' ' + document.getElementById('lname').value).trim();
+  document.getElementById('c-client-email').textContent = document.getElementById('email').value;
+  document.getElementById('c-project').textContent = document.getElementById('q-title').textContent;
+  document.getElementById('c-amount').textContent = fmtPrice(r.price);
+}
+
+function checkSignatureReady() {
+  const checked = document.getElementById('cgv-check').checked;
+  const name = document.getElementById('cgv-name').value.trim();
+  const btn = document.getElementById('btn-sign');
+  btn.disabled = !(checked && name.length >= 3);
+}
+
+function proceedToPayment() {
+  const ps = document.getElementById('payment-section');
+  ps.style.display = 'block';
+  // Update progress dots
+  ['pd1','pd2','pd3','pd4','pd5','pd6'].forEach((id,i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('active','done');
+    if (i === 5) el.classList.add('active');
+    else if (i < 5) el.classList.add('done');
+  });
+  ps.scrollIntoView({behavior:'smooth', block:'start'});
+
+  const r = calcPrice();
+  const acompte = Math.round(r.price * 0.40 / 10) * 10;
+  const solde = r.price - acompte;
+  const ref = document.getElementById('q-ref').textContent;
+  const name = (document.getElementById('fname').value + ' ' + document.getElementById('lname').value).trim();
+  const email = document.getElementById('email').value;
+
+  document.getElementById('pay-total').textContent = fmtPrice(r.price);
+  document.getElementById('pay-acompte').textContent = fmtPrice(acompte);
+  document.getElementById('pay-solde').textContent = fmtPrice(solde);
+
+  // Pre-fill contact form
+  document.getElementById('cf-name').value = name;
+  document.getElementById('cf-email').value = email;
+  document.getElementById('cf-ref-display').value = ref;
+  document.getElementById('cf-devis-ref').value = ref;
+  document.getElementById('cf-amount').value = fmtPrice(r.price);
+  document.getElementById('cf-subject').value = '[DEVIS ' + ref + '] ' + name + ' — ' + fmtPrice(r.price);
+  document.getElementById('cf-message').value = 'Bonjour,\n\nJe souhaite procéder au paiement du devis ' + ref + ' d'un montant de ' + fmtPrice(r.price) + '.\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nMerci de confirmer les modalités de paiement.';
+
+  // Virement mailto link
+  const subject = encodeURIComponent('[PAIEMENT] Devis ' + ref + ' — ' + fmtPrice(r.price));
+  const body = encodeURIComponent('Bonjour,\n\nJe souhaite procéder au paiement du devis ' + ref + '.\n\nMontant total : ' + fmtPrice(r.price) + '\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nMerci de m\'envoyer les coordonnées bancaires.\n\n' + name);
+  document.getElementById('pay-virement-link').href = 'mailto:dreamnovaultimate@gmail.com?subject=' + subject + '&body=' + body;
+}
+
+function openStripe() {
+  if (STRIPE_PAYMENT_LINK === 'https://stripe.com' || STRIPE_PAYMENT_LINK.includes('placeholder')) {
+    alert('Paiement par carte : lien Stripe non encore configuré.\nContactez-nous directement à dreamnovaultimate@gmail.com pour procéder au paiement.');
+    return;
+  }
+  window.open(STRIPE_PAYMENT_LINK, '_blank');
+}
+
+function handleFormSubmit(e) {
+  // Check if Formspree ID is configured
+  const form = document.getElementById('contact-form');
+  if (form.action.includes('FORMSPREE_ID')) {
+    e.preventDefault();
+    alert('Formulaire non configuré.\nEnvoyez votre message directement à : dreamnovaultimate@gmail.com');
+    return;
+  }
+  // Let Formspree handle it via fetch for better UX
+  e.preventDefault();
+  const data = new FormData(form);
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(r => {
+    if (r.ok) {
+      document.getElementById('cf-success').style.display = 'block';
+      form.reset();
+    } else {
+      alert('Erreur envoi. Contactez directement : dreamnovaultimate@gmail.com');
+    }
+  }).catch(() => {
+    alert('Erreur réseau. Contactez directement : dreamnovaultimate@gmail.com');
+  });
+}
+
 </script>
 </body>
 </html>

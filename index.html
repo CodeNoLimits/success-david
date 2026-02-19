@@ -629,6 +629,193 @@
     font-weight: 700;
   }
 
+
+  /* ===== COMPETITIVE SECTION ===== */
+  .competitive-section {
+    margin: 3rem 0;
+  }
+
+  .comp-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+  }
+
+  .comp-table thead tr {
+    background: rgba(212,175,55,0.06);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comp-table th {
+    padding: 1rem 1.25rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .comp-table th.comp-metric {
+    color: var(--text-muted);
+    text-align: left;
+    min-width: 180px;
+  }
+
+  .comp-table th.comp-dreamnova {
+    color: var(--gold);
+    text-align: center;
+  }
+
+  .comp-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(212,175,55,0.12);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 20px;
+  }
+
+  .comp-table th.comp-agency,
+  .comp-table th.comp-freelance {
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  .comp-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.2s;
+  }
+
+  .comp-table tbody tr:hover {
+    background: rgba(212,175,55,0.03);
+  }
+
+  .comp-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .comp-table td {
+    padding: 0.9rem 1.25rem;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .comp-table td.comp-metric {
+    text-align: left;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .comp-win {
+    color: #10B981;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .comp-win::before {
+    content: '✓ ';
+    color: #10B981;
+    font-size: 0.8em;
+  }
+
+  .comp-lose {
+    color: var(--text-muted);
+  }
+
+  .comp-mid {
+    color: var(--text-secondary);
+  }
+
+  /* Stats row */
+  .comp-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 800px) { .comp-stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .comp-stats { grid-template-columns: 1fr 1fr; } }
+
+  .comp-stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s;
+  }
+
+  .comp-stat-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-2px);
+  }
+
+  .comp-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--amber) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  .comp-stat-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  /* CTA row */
+  .comp-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .comp-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 100%);
+    color: #0C0A09;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .comp-cta-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212,175,55,0.35);
+  }
+
+  .comp-cta-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
   </style>
 </head>
 <body>
@@ -700,6 +887,95 @@
       <div class="kpi-label">Na Nach Nachman</div>
     </div>
   </div>
+
+  <!-- COMPETITIVE SAVINGS SECTION -->
+  <section class="competitive-section">
+    <div class="section-label">Avantage concurrentiel</div>
+    <h2 class="section-title">Économisez 10 à 50% par rapport aux agences traditionnelles</h2>
+    <p class="section-sub">IA-native, livrables ultra-rapides, zéro overhead — la même qualité au quart du prix.</p>
+
+    <div class="comp-table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th class="comp-metric">Critère</th>
+            <th class="comp-dreamnova"><span class="comp-logo">⬡ DreamNova</span></th>
+            <th class="comp-agency">Agence Traditionnelle</th>
+            <th class="comp-freelance">Freelance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="comp-metric">Délai de livraison MVP</td>
+            <td class="comp-dreamnova comp-win">24h – 7 jours</td>
+            <td class="comp-agency comp-lose">3 – 6 semaines</td>
+            <td class="comp-freelance comp-mid">1 – 3 semaines</td>
+          </tr>
+          <tr>
+            <td class="comp-metric">Prix MVP Landing Page</td>
+            <td class="comp-dreamnova comp-win">400 – 900 €</td>
+            <td class="comp-agency comp-lose">3 000 – 8 000 €</td>
+            <td class="comp-freelance comp-mid">800 – 2 500 €</td>
+          </tr>
+          <tr>
+            <td class="comp-metric">Révisions incluses</td>
+            <td class="comp-dreamnova comp-win">Illimitées (itératif)</td>
+            <td class="comp-agency comp-lose">2 rounds fixes</td>
+            <td class="comp-freelance comp-mid">3 rounds max</td>
+          </tr>
+          <tr>
+            <td class="comp-metric">Disponibilité</td>
+            <td class="comp-dreamnova comp-win">24/7 autonome</td>
+            <td class="comp-agency comp-lose">Heures de bureau</td>
+            <td class="comp-freelance comp-mid">Variable</td>
+          </tr>
+          <tr>
+            <td class="comp-metric">IA nativement intégré</td>
+            <td class="comp-dreamnova comp-win">100% — cœur du système</td>
+            <td class="comp-agency comp-lose">Rare / sous-traité</td>
+            <td class="comp-freelance comp-mid">Optionnel</td>
+          </tr>
+          <tr>
+            <td class="comp-metric">Code source livré</td>
+            <td class="comp-dreamnova comp-win">Toujours — GitHub inclus</td>
+            <td class="comp-agency comp-lose">Souvent refusé</td>
+            <td class="comp-freelance comp-mid">Oui, mais sans docs</td>
+          </tr>
+          <tr>
+            <td class="comp-metric">Support post-livraison</td>
+            <td class="comp-dreamnova comp-win">30 jours inclus</td>
+            <td class="comp-agency comp-lose">Facturé en sus</td>
+            <td class="comp-freelance comp-mid">7 jours max</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="comp-stats">
+      <div class="comp-stat-card">
+        <div class="comp-stat-num">-50%</div>
+        <div class="comp-stat-label">vs agence traditionnelle en moyenne</div>
+      </div>
+      <div class="comp-stat-card">
+        <div class="comp-stat-num">5x</div>
+        <div class="comp-stat-label">plus rapide grâce à l'IA-native</div>
+      </div>
+      <div class="comp-stat-card">
+        <div class="comp-stat-num">0</div>
+        <div class="comp-stat-label">frais cachés — prix tout compris</div>
+      </div>
+      <div class="comp-stat-card">
+        <div class="comp-stat-num">24/7</div>
+        <div class="comp-stat-label">disponibilité autonome IA</div>
+      </div>
+    </div>
+
+    <div class="comp-cta">
+      <a href="devis.html" class="comp-cta-btn">Obtenir mon devis gratuit →</a>
+      <span class="comp-cta-note">Réponse en &lt; 24h · Aucun engagement · Tarif transparent</span>
+    </div>
+  </section>
+
 
   <!-- CHARTS -->
   <div class="section-label">Métriques en temps réel</div>

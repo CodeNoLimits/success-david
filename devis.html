@@ -967,9 +967,16 @@ select option{background:var(--bg2);color:var(--text)}
       <div class="payment-card">
         <div class="pay-icon">🏦</div>
         <div class="pay-name">Virement bancaire</div>
-        <div class="pay-desc">Contactez-nous pour recevoir les coordonnées bancaires. Réponse sous 2h.</div>
+        <div class="pay-desc">Virement SEPA (EUR) — rapide et sans frais.</div>
+        <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:8px;padding:12px;margin:8px 0;text-align:left;font-size:0.82rem;line-height:1.6">
+          <div style="font-weight:600;color:var(--amber);margin-bottom:6px">Coordonnées bancaires :</div>
+          <div><strong>IBAN :</strong> DE12 2022 0800 0040 5812 62</div>
+          <div><strong>BIC/SWIFT :</strong> SXPYDEHH</div>
+          <div><strong>Banque :</strong> Banking Circle S.A. (Allemagne)</div>
+          <div><strong>Bénéficiaire :</strong> David Amore</div>
+        </div>
         <a id="pay-virement-link" class="pay-btn pay-btn-bank" href="#">
-          Contacter pour virement →
+          Confirmer mon virement →
         </a>
       </div>
 
@@ -1351,8 +1358,8 @@ function proceedToPayment() {
   document.getElementById('cf-message').value = 'Bonjour,\n\nJe souhaite procéder au paiement du devis ' + ref + ' d\'un montant de ' + fmtPrice(r.price) + '.\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nMerci de confirmer les modalités de paiement.';
 
   // Virement mailto link
-  const subject = encodeURIComponent('[PAIEMENT] Devis ' + ref + ' — ' + fmtPrice(r.price));
-  const body = encodeURIComponent('Bonjour,\n\nJe souhaite procéder au paiement du devis ' + ref + '.\n\nMontant total : ' + fmtPrice(r.price) + '\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nMerci de m\'envoyer les coordonnées bancaires.\n\n' + name);
+  const subject = encodeURIComponent('[VIREMENT] Devis ' + ref + ' — ' + fmtPrice(r.price));
+  const body = encodeURIComponent('Bonjour,\n\nJe confirme mon virement pour le devis ' + ref + '.\n\nMontant total : ' + fmtPrice(r.price) + '\nAcompte 40% : ' + fmtPrice(acompte) + '\n\nVirement effectué vers :\nIBAN : DE12 2022 0800 0040 5812 62\nBIC : SXPYDEHH\nBénéficiaire : David Amore\n\nCordialement,\n' + name);
   document.getElementById('pay-virement-link').href = 'mailto:dreamnovaultimate@gmail.com?subject=' + subject + '&body=' + body;
 }
 
